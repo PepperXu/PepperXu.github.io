@@ -11,6 +11,9 @@ date: 2021-08-17 00:00 +0000
 
 ![Waterflow shading](/assets/imgs/waterflow-shading/waterflow.png "watershading")
 
+## Link
+<https://github.com/PepperXu/WaterflowShading>
+
 ## Features
 
 - The ripples are simulated in two layers of Voronoi noise with parallel movement (one is the base and one is the highlight) , giving the final render a more dynamic and realistic look. 

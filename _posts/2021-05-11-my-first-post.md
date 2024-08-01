@@ -3,7 +3,7 @@ layout: post
 title: My Old First Post
 author: psxu
 date: 2021-05-11 11:30 +0800
-categories: [test]
+categories: [General]
 description: just a simple test post
 ---
 

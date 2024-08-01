@@ -3,7 +3,7 @@ layout: post
 title: Vibeke and Lansing
 author: psxu
 description: Old times in ADM
-category: art
+category: Art
 tag:
 date: 2021-05-12 00:00 +0000
 ---
