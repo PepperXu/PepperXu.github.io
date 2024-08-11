@@ -16,7 +16,7 @@ timezone: Asia/Singapore
 
 title: Pepper Xu # the main title
 
-tagline: A HCI researcher who makes games (occasionally), make music (sometimes), play PTCG (still quite new to this), and sleep a lot (cannot help myself...) # it will display as the sub-title
+tagline: 我思故我在 # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
   A minimal, responsive and feature-rich Jekyll theme for technical writing.
@@ -96,7 +96,7 @@ theme_mode: # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: /assets/avatar/avatar-test.png
+avatar: /assets/avatar/avatar.png
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
