@@ -16,10 +16,10 @@ timezone: Asia/Singapore
 
 title: PEISEN # the main title
 
-tagline: needs another coffee zzz. # it will display as the sub-title
+tagline: needs another coffee zzz. I am a PhD student in Interaction Design. # it will display as the sub-title
 
 description: >- # used by seo meta and the atom feed
-  Technical Artist, Tool Programmer, UX Designer, HCI Researcher
+  Human-Computer Interaction, Drone, Technical Artist, Tool Programmer, UX Designer
 
 # Fill in the protocol & hostname for your site.
 # e.g. 'https://username.github.io', note that it does not end with a '/'.
@@ -240,3 +240,5 @@ jekyll_compose:
       category:
       tag:
 
+plugins:
+  - jekyll-redirect-from

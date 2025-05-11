@@ -13,3 +13,5 @@ gem 'jekyll-compose', group: [:jekyll_plugins]
 gem 'tzinfo'
 
 gem 'tzinfo-data'
+
+gem 'jekyll-redirect-from'
