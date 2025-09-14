@@ -1,17 +1,24 @@
 ---
 permalink: /
-title: "Academic Pages is a ready-to-fork GitHub Pages template for academic personal websites"
+title: "Xu Peisen, HCI Researcher"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
 
-This is the front page of a website that is powered by the [Academic Pages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the repository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. Incidentally, these same features make it a great template for anyone that needs to show off a professional template!
+Peisen is a PhD candidate at National University of Singapore, advised by Prof. Wei Tsang Ooi, and Prof. Christophe Jouffrais. He also collaborated with Prof Jérémie Garcia from Ecole Nationale de l'Aviation Civile, Toulouse, France. 
+
+His research focuses on Human-Drone Interaction, Design for Specialized User Groups, Virtual/Augmented/Mixed Reality, and 3D Heads-up Interface Design and System Implementation. He is also enthusiastic about video game design and development and 3D real-time visual effects. 
+
+I previously graduadated with a Master of Arts degree and a Bachelor of Engineering degree from Nanyang Technological University. I grew up in Tianjin, China. In my free time, I enjoy making coffee, reading books, playing video games, and making musics. 
+
+
+[Academic Pages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the repository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. Incidentally, these same features make it a great template for anyone that needs to show off a professional template!
 
  You can fork [this template](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and Markdown files, add your own PDFs and other content, and have your own site for free, with no ads!
 
-A data-driven personal website
+Selected Publications
 ======
 Like many other Jekyll-based GitHub Pages templates, Academic Pages makes you separate the website's content from its form. The content & metadata of your website are in structured Markdown files, while various other files constitute the theme, specifying how to transform that content & metadata into HTML pages. You keep these various Markdown (.md), YAML (.yml), HTML, and CSS files in a public GitHub repository. Each time you commit and push an update to the repository, the [GitHub pages](https://pages.github.com/) service creates static HTML pages based on these files, which are hosted on GitHub's servers free of charge.
 
@@ -22,7 +29,7 @@ For those users that need more advanced functionality, the template also support
 - [Mermaid](https://mermaid.js.org/) for diagraming
 - [Plotly](https://plotly.com/javascript/) for plotting
 
-Getting started
+Current Projects
 ======
 1. Register a GitHub account if you don't have one and confirm your e-mail (required!)
 1. Fork [this template](https://github.com/academicpages/academicpages.github.io) by clicking the "Use this template" button in the top right. 
