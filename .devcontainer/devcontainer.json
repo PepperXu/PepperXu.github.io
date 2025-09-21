@@ -5,11 +5,11 @@
     "remoteEnv": {
         "VSCODE_SERVER_DIR": "/home/vscode/.vscode-server"
     },
-    "runArgs": [
-        "--user",
-        "1000:1000"
-    ],
+    // "runArgs": [
+    //     "--user",
+    //     "1000:1000"
+    // ],
     "workspaceFolder": "/usr/src/app",
     "remoteUser": "vscode",
-    "forwardPorts": [4000] // Add port forwarding
+    "forwardPorts": [4000, 35729] // Add port forwarding
 }
