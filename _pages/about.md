@@ -11,7 +11,7 @@ Peisen is a PhD candidate at National University of Singapore, advised by Prof. 
 
 His research focuses on Human-Drone Interaction, Design for Specialized User Groups, Virtual/Augmented/Mixed Reality, and 3D Heads-up Interface Design and System Implementation. He is also enthusiastic about video game design and development and 3D real-time visual effects. 
 
-I previously graduadated with a Master of Arts degree and a Bachelor of Engineering degree from Nanyang Technological University. I grew up in Tianjin, China. In my free time, I enjoy making coffee, reading books, playing video games, and making musics. 
+He previously graduadated with a Master of Arts degree and a Bachelor of Engineering degree from Nanyang Technological University. I grew up in Tianjin, China. Recently in my free time, I enjoy cycling, sim racing and making musics. 
 
 [**My CV**](https://docs.google.com/document/d/1FGI5dvxul0QFVjmSzW7Cuojw6O4NPx6w0NWuFn0dsg8/edit?usp=sharing)
 
@@ -36,6 +36,8 @@ SafeSpect: Safety-First Augmented Reality Heads-up Display for Drone Inspections
 - An adaptive AR interface design that overlays in-situ information to support drone pilots in safety-critical tasks, and dynamically switches between task and safety views to prevent information overload, 
 - Evaluation with a realistic building inspection task comparing three interfaces: a 2D tablet, a static AR, and our adaptive AR design, which showed that the AR interface improved access to safety information, while the adaptive AR interface reduced cognitive load and enhanced situational awareness without compromising task performance. 
 
+![SafeSpect_Teaser](/assets/imgs/safespect/teaser-ar-enhanced.png)
+
 
 Towards Rendering the Style of 20th Century Cartoon Line Art in 3D Real-Time
 ------
@@ -45,6 +47,10 @@ Towards Rendering the Style of 20th Century Cartoon Line Art in 3D Real-Time
 
 - Propose Al Hirschfeld (1903-2003)'s artworks as style guides to design and develop line art characters in 3D real-time animation,
 - Developed the workflow and rendering tools to re-create Al Hirschfeld's graphical line style in 3D, focusing artistic directed control of the line style in animation frames. 
+
+![Cartoon_Teaser](/assets/imgs/hirschfeld/gershwin_comparison.png)
+
+
 
 
 
