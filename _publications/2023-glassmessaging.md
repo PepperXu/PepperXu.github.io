@@ -3,7 +3,7 @@ title: "GlassMessaging: Towards Ubiquitous Messaging Using OHMDs"
 collection: publications
 category: conferences
 permalink: /publication/2023-glassmessaging
-excerpt: '[Video](https://www.youtube.com/watch?v=zToQXqGnSQg)'
+excerpt: '[Video](https://www.youtube.com/watch?v=zToQXqGnSQg) - [Code](https://github.com/Synteraction-Lab/GlassMessaging)'
 date: 2023-09-27
 venue: "UbiComp/ISWC '23"
 paperurl: 'https://www.youtube.com/watch?v=zToQXqGnSQg'
