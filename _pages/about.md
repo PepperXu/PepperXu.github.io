@@ -7,11 +7,11 @@ redirect_from:
   - /about.html
 ---
 
-Peisen is a PhD candidate at National University of Singapore, advised by Prof. Wei Tsang Ooi, and Prof. Christophe Jouffrais. He also collaborated with Prof Jérémie Garcia from Ecole Nationale de l'Aviation Civile, Toulouse, France. 
+I am a PhD candidate at National University of Singapore, advised by Prof. Wei Tsang Ooi, and Prof. Christophe Jouffrais. I also collaborated with Prof Jérémie Garcia from Ecole Nationale de l'Aviation Civile, Toulouse, France. 
 
-His research focuses on Human-Drone Interaction, Design for Specialized User Groups, Virtual/Augmented/Mixed Reality, and 3D Heads-up Interface Design and System Implementation. He is also enthusiastic about video game design and development and 3D real-time visual effects. 
+My research focuses on Human-Drone Interaction, Design for Specialized User Groups, Virtual/Augmented/Mixed Reality, and 3D Heads-up Interface Design and System Implementation. I am also enthusiastic about video game design and development and 3D real-time visual effects. 
 
-He previously graduadated with a Master of Arts degree and a Bachelor of Engineering degree from Nanyang Technological University. I grew up in Tianjin, China. Recently in my free time, I enjoy cycling, sim racing and making musics. 
+I previously graduadated with a Master of Arts degree and a Bachelor of Engineering degree from Nanyang Technological University. I grew up in Tianjin, China. Recently in my free time, I enjoy cycling, making musics and playing RPG games (Skyrim, Baldur's Gate 3). 
 
 [**My CV**](https://docs.google.com/document/d/1FGI5dvxul0QFVjmSzW7Cuojw6O4NPx6w0NWuFn0dsg8/edit?usp=sharing)
 
