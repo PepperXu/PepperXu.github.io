@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bundle exec:*)",
+      "Bash(powershell -Command ':*)",
+      "Bash(docker --version)",
+      "Bash(docker compose:*)",
+      "Bash(curl -s http://localhost:4000/)",
+      "Bash(npx playwright@latest screenshot http://localhost:4000/ /tmp/site-full.png --full-page)",
+      "Bash(npx playwright:*)",
+      "Bash('#experience')",
+      "Bash('#talks')",
+      "Bash('#teaching')",
+      "Bash(node -e ':*)",
+      "Bash(cd /tmp)",
+      "Bash(node -e \"const {chromium}=require\\('@playwright/test'\\);\\(async\\(\\)=>{const b=await chromium.launch\\(\\);const p=await b.newPage\\(\\);await p.setViewportSize\\({width:1280,height:900}\\);await p.goto\\('http://localhost:4000/'\\);await p.waitForTimeout\\(500\\);for\\(const id of['experience','talks','teaching']\\){const el=await p.locator\\('#'+id\\).first\\(\\);await el.screenshot\\({path:'C:/Users/XPS83/AppData/Local/Temp/'+id+'.png'}\\);}await b.close\\(\\);}\\)\\(\\)\")",
+      "Bash(node)",
+      "Bash(npx --yes playwright@1.49 screenshot --browser chromium \"javascript:void\\(document.getElementById\\('talks'\\).scrollIntoView\\(\\)\\)\" \"talks-direct.png\")",
+      "Bash(where npx:*)",
+      "Bash(npm root:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(node snap.cjs)",
+      "Bash(node snap2.cjs)",
+      "Bash(docker exec:*)",
+      "Bash(curl -s \"http://localhost:4000/assets/css/main.css\")",
+      "Bash(ls /tmp/*.png)",
+      "Read(//tmp/**)",
+      "Bash(wslpath -w /tmp/exp-final.png)",
+      "Bash(cygpath -w /tmp/exp-final.png)",
+      "Bash(echo \"/tmp maps to C:\\\\\\\\Windows\\\\\\\\Temp or similar\")",
+      "Bash(cmd.exe /c \"dir C:\\\\\\\\Windows\\\\\\\\Temp\\\\\\\\exp-final.png 2>nul\")"
+    ]
+  }
+}

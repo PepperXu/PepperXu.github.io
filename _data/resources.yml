@@ -1,0 +1,11 @@
+external:
+
+  - title: "Real-time Stylized Rendering Editor"
+    url: "https://github.com/PepperXu/Real-time-Stylized-Rendering-Editor"
+    icon: "fab fa-github"
+    description: "Unity URP tools for Al Hirschfeld–style line art"
+
+  - title: "Drone Safety Simulation"
+    url: "https://github.com/PepperXu/drone-safety-sim"
+    icon: "fab fa-github"
+    description: "AR simulation for the SafeSpect system"

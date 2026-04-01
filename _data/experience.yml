@@ -1,0 +1,15 @@
+education:
+  - degree: "PhD in Computer Science"
+    field: "Human-Computer Interaction"
+    institution: "National University of Singapore"
+    period: "2021 – Present"
+    advisors: "Prof. Wei Tsang Ooi, Prof. Christophe Jouffrais"
+    collab: "Prof. Jérémie Garcia (Ecole Nationale de l'Aviation Civile, France)"
+
+  - degree: "Master of Arts"
+    institution: "Nanyang Technological University"
+    period: "2019 – 2021"
+
+  - degree: "Bachelor of Engineering"
+    institution: "Nanyang Technological University"
+    period: "2015 – 2019"

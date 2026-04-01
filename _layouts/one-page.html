@@ -1,0 +1,417 @@
+---
+layout: compress
+---
+
+{% include base_path %}
+
+<!doctype html>
+<html lang="{{ site.locale | slice: 0,2 }}" class="no-js">
+  <head>
+    {% include head.html %}
+    {% include head/custom.html %}
+  </head>
+
+  <body class="op-body">
+
+    {% include browser-upgrade.html %}
+
+    <!-- ─── STICKY NAV ─────────────────────────────────────── -->
+    <nav class="op-nav" id="op-nav" aria-label="Page sections">
+      <div class="op-nav__inner">
+        <a class="op-nav__brand" href="#about">{{ site.author.name }}</a>
+
+        <ul class="op-nav__links" id="op-nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#experience">Experience</a></li>
+          <li><a href="#teaching">Teaching</a></li>
+          {% if site.talks.size > 0 %}<li><a href="#talks">Talks</a></li>{% endif %}
+          <li><a href="#resources">Resources</a></li>
+        </ul>
+
+        <button class="op-nav__toggle" id="op-nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- ─── ABOUT / HERO ────────────────────────────────────── -->
+    <section id="about" class="op-section op-hero">
+      <div class="op-container">
+        <div class="op-hero__layout">
+
+          <div class="op-hero__photo">
+            {% if site.author.avatar contains "://" %}
+              <img src="{{ site.author.avatar }}" alt="{{ site.author.name }}" />
+            {% else %}
+              <img src="{{ site.author.avatar | prepend: '/images/' | prepend: base_path }}" alt="{{ site.author.name }}" />
+            {% endif %}
+          </div>
+
+          <div class="op-hero__content">
+            <h1 class="op-hero__name">{{ site.author.name }}</h1>
+            <p class="op-hero__subtitle">{{ site.author.bio }}</p>
+            <p class="op-hero__meta">
+              <i class="fas fa-building-columns" aria-hidden="true"></i>&thinsp;{{ site.author.employer }}
+              &ensp;&middot;&ensp;
+              <i class="fas fa-location-dot" aria-hidden="true"></i>&thinsp;{{ site.author.location }}
+            </p>
+
+            <div class="op-hero__bio">
+              {{ content }}
+            </div>
+
+            <div class="op-hero__links">
+              {% if site.author.email %}
+              <a href="mailto:{{ site.author.email }}" class="op-btn">
+                <i class="fas fa-envelope" aria-hidden="true"></i> Email
+              </a>
+              {% endif %}
+              {% if site.author.googlescholar %}
+              <a href="{{ site.author.googlescholar }}" class="op-btn" target="_blank" rel="noopener">
+                <i class="fas fa-graduation-cap" aria-hidden="true"></i> Scholar
+              </a>
+              {% endif %}
+              {% if site.author.github %}
+              <a href="https://github.com/{{ site.author.github }}" class="op-btn" target="_blank" rel="noopener">
+                <i class="fab fa-github" aria-hidden="true"></i> GitHub
+              </a>
+              {% endif %}
+              {% if site.author.linkedin %}
+              <a href="https://www.linkedin.com/in/{{ site.author.linkedin }}" class="op-btn" target="_blank" rel="noopener">
+                <i class="fab fa-linkedin" aria-hidden="true"></i> LinkedIn
+              </a>
+              {% endif %}
+              {% if site.author.orcid %}
+              <a href="{{ site.author.orcid }}" class="op-btn" target="_blank" rel="noopener">
+                <i class="fas fa-id-badge" aria-hidden="true"></i> ORCID
+              </a>
+              {% endif %}
+              <a href="https://docs.google.com/document/d/1FGI5dvxul0QFVjmSzW7Cuojw6O4NPx6w0NWuFn0dsg8/edit?usp=sharing" class="op-btn op-btn--primary" target="_blank" rel="noopener">
+                <i class="fas fa-file-alt" aria-hidden="true"></i> CV
+              </a>
+            </div>
+          </div><!-- /.op-hero__content -->
+
+        </div><!-- /.op-hero__layout -->
+      </div><!-- /.op-container -->
+    </section>
+
+    <!-- ─── PUBLICATIONS ────────────────────────────────────── -->
+    <section id="publications" class="op-section op-section--alt">
+      <div class="op-container">
+        <h2 class="op-section__title">Publications</h2>
+
+        {% assign featured_pubs = site.publications | where: "featured", true %}
+        {% if featured_pubs.size > 0 %}
+          <h3 class="op-subsection__title">Highlighted Publications</h3>
+          <div class="op-pub-grid op-pub-grid--featured">
+            {% for pub in featured_pubs reversed %}
+            <article class="op-pub-card op-pub-card--featured">
+              {% if pub.header.teaser %}
+              <div class="op-pub-card__fig">
+                <img src="{{ pub.header.teaser | prepend: base_path }}" alt="{{ pub.title }}" loading="lazy" />
+              </div>
+              {% endif %}
+              <div class="op-pub-card__body">
+                {% if pub.award %}
+                <span class="op-badge op-badge--award">
+                  <i class="fas fa-award" aria-hidden="true"></i> {{ pub.award }}
+                </span>
+                {% endif %}
+                <h4 class="op-pub-card__title">
+                  {% if pub.paperurl %}
+                    <a href="{{ pub.paperurl }}" target="_blank" rel="noopener">{{ pub.title }}</a>
+                  {% else %}
+                    {{ pub.title }}
+                  {% endif %}
+                </h4>
+                {% if pub.authors %}
+                <p class="op-pub-card__authors">{{ pub.authors }}</p>
+                {% endif %}
+                <p class="op-pub-card__venue"><em>{{ pub.venue }}</em> &middot; {{ pub.date | date: "%Y" }}</p>
+                {% if pub.description %}
+                  <p class="op-pub-card__desc">{{ pub.description }}</p>
+                {% elsif pub.excerpt %}
+                  <p class="op-pub-card__desc">{{ pub.excerpt | strip_html | truncatewords: 45 }}</p>
+                {% endif %}
+                <div class="op-pub-card__links">
+                  {% if pub.paperurl %}<a href="{{ pub.paperurl }}" class="op-tag" target="_blank" rel="noopener">Paper</a>{% endif %}
+                  {% if pub.videourl %}<a href="{{ pub.videourl }}" class="op-tag" target="_blank" rel="noopener">Video</a>{% endif %}
+                  {% if pub.demourl %}<a href="{{ pub.demourl }}" class="op-tag" target="_blank" rel="noopener">Demo</a>{% endif %}
+                  {% if pub.slidesurl %}<a href="{{ pub.slidesurl }}" class="op-tag" target="_blank" rel="noopener">Slides</a>{% endif %}
+                  {% if pub.codeurl %}<a href="{{ pub.codeurl }}" class="op-tag" target="_blank" rel="noopener">Code</a>{% endif %}
+                </div>
+              </div>
+            </article>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <h3 class="op-subsection__title">All Publications</h3>
+        {% if site.author.googlescholar %}
+        <p class="op-pub-scholar">
+          <a href="{{ site.author.googlescholar }}" target="_blank" rel="noopener">
+            <i class="fas fa-graduation-cap" aria-hidden="true"></i> View full list on Google Scholar
+          </a>
+        </p>
+        {% endif %}
+        <div class="op-pub-grid op-pub-grid--list">
+          {% for pub in site.publications reversed %}
+          <article class="op-pub-card op-pub-card--row">
+            {% if pub.header.teaser %}
+            <div class="op-pub-card__thumb">
+              <img src="{{ pub.header.teaser | prepend: base_path }}" alt="{{ pub.title }}" loading="lazy" />
+            </div>
+            {% endif %}
+            <div class="op-pub-card__body">
+              {% if pub.award %}
+              <span class="op-badge op-badge--award op-badge--sm">
+                <i class="fas fa-award" aria-hidden="true"></i> {{ pub.award }}
+              </span>
+              {% endif %}
+              <h4 class="op-pub-card__title">
+                {% if pub.paperurl %}
+                  <a href="{{ pub.paperurl }}" target="_blank" rel="noopener">{{ pub.title }}</a>
+                {% else %}
+                  {{ pub.title }}
+                {% endif %}
+              </h4>
+              {% if pub.authors %}
+              <p class="op-pub-card__authors">{{ pub.authors }}</p>
+              {% endif %}
+              <p class="op-pub-card__venue"><em>{{ pub.venue }}</em> &middot; {{ pub.date | date: "%Y" }}</p>
+              <div class="op-pub-card__links">
+                {% if pub.paperurl %}<a href="{{ pub.paperurl }}" class="op-tag op-tag--sm" target="_blank" rel="noopener">Paper</a>{% endif %}
+                {% if pub.videourl %}<a href="{{ pub.videourl }}" class="op-tag op-tag--sm" target="_blank" rel="noopener">Video</a>{% endif %}
+                {% if pub.demourl %}<a href="{{ pub.demourl }}" class="op-tag op-tag--sm" target="_blank" rel="noopener">Demo</a>{% endif %}
+                {% if pub.slidesurl %}<a href="{{ pub.slidesurl }}" class="op-tag op-tag--sm" target="_blank" rel="noopener">Slides</a>{% endif %}
+                {% if pub.codeurl %}<a href="{{ pub.codeurl }}" class="op-tag op-tag--sm" target="_blank" rel="noopener">Code</a>{% endif %}
+              </div>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─── EXPERIENCE ──────────────────────────────────────── -->
+    {% if site.data.experience %}
+    <section id="experience" class="op-section">
+      <div class="op-container">
+        <h2 class="op-section__title">Experience</h2>
+
+        {% if site.data.experience.education %}
+        <h3 class="op-subsection__title">Education</h3>
+        <div class="op-timeline">
+          {% for item in site.data.experience.education %}
+          <div class="op-timeline__item">
+            <div class="op-timeline__dot"></div>
+            <div class="op-timeline__content">
+              <div class="op-timeline__header">
+                <h4 class="op-timeline__title">{{ item.degree }}{% if item.field %} &mdash; {{ item.field }}{% endif %}</h4>
+                <span class="op-timeline__period">{{ item.period }}</span>
+              </div>
+              <p class="op-timeline__inst">{{ item.institution }}</p>
+              {% if item.advisors %}<p class="op-timeline__detail">Advisors: {{ item.advisors }}</p>{% endif %}
+              {% if item.collab %}<p class="op-timeline__detail">Collaborator: {{ item.collab }}</p>{% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if site.data.experience.work %}
+        <h3 class="op-subsection__title">Work</h3>
+        <div class="op-timeline">
+          {% for item in site.data.experience.work %}
+          <div class="op-timeline__item">
+            <div class="op-timeline__dot"></div>
+            <div class="op-timeline__content">
+              <div class="op-timeline__header">
+                <h4 class="op-timeline__title">{{ item.role }}</h4>
+                <span class="op-timeline__period">{{ item.period }}</span>
+              </div>
+              <p class="op-timeline__inst">{{ item.institution }}</p>
+              {% if item.description %}<p class="op-timeline__detail">{{ item.description }}</p>{% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- ─── TEACHING ────────────────────────────────────────── -->
+    {% assign teachings = site.teaching | sort: "date" | reverse %}
+    {% if teachings.size > 0 %}
+    <section id="teaching" class="op-section op-section--alt">
+      <div class="op-container">
+        <h2 class="op-section__title">Teaching</h2>
+        <ul class="op-teaching-list">
+          {% for item in teachings %}
+          <li class="op-teaching-item">
+            <div class="op-teaching-meta">
+              <span class="op-teaching-year">{{ item.date | date: "%Y" }}</span>
+              <span class="op-teaching-type">{{ item.type }}</span>
+            </div>
+            <div class="op-teaching-body">
+              <h4 class="op-teaching-title">{{ item.title }}</h4>
+              <p class="op-teaching-venue">{{ item.venue }}</p>
+              <div class="op-teaching-content">{{ item.content }}</div>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- ─── TALKS ───────────────────────────────────────────── -->
+    {% if site.talks.size > 0 %}
+    <section id="talks" class="op-section">
+      <div class="op-container">
+        <h2 class="op-section__title">Talks</h2>
+        <ul class="op-talks-list">
+          {% for talk in site.talks reversed %}
+          <li class="op-talk-item">
+            <span class="op-talk-date">{{ talk.date | date: "%b %Y" }}</span>
+            <div class="op-talk-body">
+              <h4 class="op-talk-title">{{ talk.title }}</h4>
+              <p class="op-talk-venue">
+                <em>{{ talk.type }}</em> &middot; {{ talk.venue }}{% if talk.location %} &middot; {{ talk.location }}{% endif %}
+              </p>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </section>
+    {% endif %}
+
+    <!-- ─── RESOURCES ───────────────────────────────────────── -->
+    <section id="resources" class="op-section {% if site.talks.size > 0 %}op-section--alt{% endif %}">
+      <div class="op-container">
+        <h2 class="op-section__title">Resources</h2>
+
+        {% if site.data.resources and site.data.resources.external and site.data.resources.external.size > 0 %}
+        <h3 class="op-subsection__title">External Links</h3>
+        <div class="op-resources-grid op-resources-grid--links">
+          {% for res in site.data.resources.external %}
+          <a href="{{ res.url }}" class="op-resource-card op-resource-card--link" target="_blank" rel="noopener">
+            <div class="op-resource-card__icon">
+              {% if res.icon %}
+                <i class="{{ res.icon }}" aria-hidden="true"></i>
+              {% else %}
+                <i class="fas fa-external-link-alt" aria-hidden="true"></i>
+              {% endif %}
+            </div>
+            <div class="op-resource-card__body">
+              <h4 class="op-resource-card__title">{{ res.title }}</h4>
+              {% if res.description %}<p class="op-resource-card__desc">{{ res.description }}</p>{% endif %}
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if site.posts.size > 0 %}
+        <h3 class="op-subsection__title">Blog Posts</h3>
+        <div class="op-resources-grid">
+          {% for post in site.posts %}
+          <a href="{{ post.url | prepend: base_path }}" class="op-resource-card">
+            {% if post.header.teaser %}
+            <div class="op-resource-card__img">
+              <img src="{{ post.header.teaser | prepend: base_path }}" alt="{{ post.title }}" loading="lazy" />
+            </div>
+            {% else %}
+            <div class="op-resource-card__icon op-resource-card__icon--post">
+              <i class="fas fa-pen-nib" aria-hidden="true"></i>
+            </div>
+            {% endif %}
+            <div class="op-resource-card__body">
+              <h4 class="op-resource-card__title">{{ post.title }}</h4>
+              <p class="op-resource-card__date">{{ post.date | date: "%B %Y" }}</p>
+              {% if post.excerpt %}<p class="op-resource-card__desc">{{ post.excerpt | strip_html | truncatewords: 18 }}</p>{% endif %}
+            </div>
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+      </div>
+    </section>
+
+    <!-- ─── FOOTER ──────────────────────────────────────────── -->
+    <div class="page__footer">
+      <footer>
+        {% include footer/custom.html %}
+        {% include footer.html %}
+      </footer>
+    </div>
+
+    {% include scripts.html %}
+
+    <script>
+    (function () {
+      'use strict';
+
+      var nav = document.getElementById('op-nav');
+      var toggle = document.getElementById('op-nav-toggle');
+      var links = document.getElementById('op-nav-links');
+
+      // Mobile toggle
+      if (toggle && links) {
+        toggle.addEventListener('click', function () {
+          var open = links.classList.toggle('op-nav__links--open');
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      }
+
+      // Close mobile menu when a link is clicked
+      if (links) {
+        links.querySelectorAll('a').forEach(function (a) {
+          a.addEventListener('click', function () {
+            links.classList.remove('op-nav__links--open');
+            toggle && toggle.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      // Active section highlight via IntersectionObserver
+      var sections = document.querySelectorAll('section[id]');
+      var navLinks = document.querySelectorAll('.op-nav__links a');
+
+      function setActive(id) {
+        navLinks.forEach(function (a) {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      }
+
+      if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) setActive(entry.target.id);
+          });
+        }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+
+        sections.forEach(function (s) { observer.observe(s); });
+      } else {
+        // Fallback: scroll-based
+        window.addEventListener('scroll', function () {
+          var scrollY = window.scrollY;
+          var current = '';
+          sections.forEach(function (s) {
+            if (scrollY >= s.offsetTop - 80) current = s.id;
+          });
+          if (current) setActive(current);
+        }, { passive: true });
+      }
+    })();
+    </script>
+
+  </body>
+</html>
