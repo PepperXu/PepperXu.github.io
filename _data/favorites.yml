@@ -52,3 +52,7 @@ categories:
         creator: "Iron Gate AB"
         image: "/images/favorites/valheim.jpg"
         url: "https://store.steampowered.com/app/892970/"
+      - title: "EVE Online"
+        creator: "CCP Games"
+        image: "/images/favorites/eve-online.jpg"
+        url: "https://www.eveonline.com/"
