@@ -111,7 +111,20 @@ layout: compress
           <div class="op-pub-grid op-pub-grid--featured">
             {% for pub in featured_pubs reversed %}
             <article class="op-pub-card op-pub-card--featured">
-              {% if pub.header.teaser %}
+              {% if pub.header.images and pub.header.images.size > 0 %}
+              <div class="op-pub-card__fig op-pub-card__fig--gallery">
+                <div class="op-pub-card__fig-imgs">
+                  {% for img in pub.header.images %}
+                  <img src="{{ img.src | prepend: base_path }}" alt="{{ img.label | default: pub.title }}" class="op-pub-fig-img{% if forloop.first %} op-pub-fig-img--active{% endif %}"{% unless forloop.first %} loading="lazy"{% endunless %} />
+                  {% endfor %}
+                </div>
+                <div class="op-pub-card__fig-btns">
+                  {% for img in pub.header.images %}
+                  <button type="button" class="op-pub-fig-btn{% if forloop.first %} op-pub-fig-btn--active{% endif %}" data-idx="{{ forloop.index0 }}">{{ img.label }}</button>
+                  {% endfor %}
+                </div>
+              </div>
+              {% elsif pub.header.teaser %}
               <div class="op-pub-card__fig">
                 <img src="{{ pub.header.teaser | prepend: base_path }}" alt="{{ pub.title }}" loading="lazy" />
               </div>
@@ -450,6 +463,22 @@ layout: compress
           if (current) setActive(current);
         }, { passive: true });
       }
+
+      document.querySelectorAll('.op-pub-card__fig--gallery').forEach(function (gallery) {
+        var imgs = gallery.querySelectorAll('.op-pub-fig-img');
+        var btns = gallery.querySelectorAll('.op-pub-fig-btn');
+        btns.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var idx = parseInt(btn.getAttribute('data-idx'), 10);
+            imgs.forEach(function (img, i) {
+              img.classList.toggle('op-pub-fig-img--active', i === idx);
+            });
+            btns.forEach(function (b, i) {
+              b.classList.toggle('op-pub-fig-btn--active', i === idx);
+            });
+          });
+        });
+      });
     })();
     </script>
 

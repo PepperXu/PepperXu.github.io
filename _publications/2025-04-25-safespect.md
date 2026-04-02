@@ -15,6 +15,9 @@ codeurl: 'https://github.com/PepperXu/drone-safety-sim'
 description: 'Participatory design with professional pilots leading to an adaptive AR heads-up display that dynamically switches between task and safety views. Evaluation on a realistic building inspection task showed improved situational awareness and reduced cognitive load without compromising task performance.'
 citation: 'Xu, P., Garcia, J., Ooi, W. T., & Jouffrais, C. (2025, April). SafeSpect: Safety-First Augmented Reality Heads-up Display for Drone Inspections. In <i>Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems</i> (pp. 1-17).'
 header:
+   images:
+    - src: "/images/safespect/teaser-ar-enhanced.png"
+      label: "Overview"
    teaser: "/images/safespect/teaser-ar-enhanced.png"
 # To show a feature figure in the highlighted publication card, add:
 # header:

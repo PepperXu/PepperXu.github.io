@@ -46,7 +46,8 @@
       "Bash(magick --version)",
       "Bash(mv blade-runner.jpg blade-runner.png)",
       "Bash(python3 -c ':*)",
-      "Bash(/c/Python313/python -c ':*)"
+      "Bash(/c/Python313/python -c ':*)",
+      "Bash(curl:*)"
     ]
   }
 }

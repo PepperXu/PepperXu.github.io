@@ -339,9 +339,15 @@
         object-fit: cover;
         transition: transform 0.4s ease;
       }
+
+      &--gallery {
+        height: auto;
+        overflow: visible;
+        background: none;
+      }
     }
 
-    &:hover .op-pub-card__fig img {
+    &:hover .op-pub-card__fig:not(.op-pub-card__fig--gallery) img {
       transform: scale(1.04);
     }
 
@@ -825,6 +831,64 @@
     .op-resource-card__title {
       font-size: 0.88rem;
     }
+  }
+}
+
+// ─── Publication image gallery ──────────────────────────────────────────────
+.op-pub-card__fig-imgs {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: #f3f4f6;
+  flex-shrink: 0;
+}
+
+.op-pub-fig-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+
+  &--active { opacity: 1; }
+}
+
+.op-pub-card__fig-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.45rem 0.75rem;
+  background: var(--op-surface-alt);
+  border-top: 1px solid var(--op-border);
+}
+
+.op-pub-fig-btn {
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 1.5;
+  padding: 0.15rem 0.6rem;
+  border-radius: 4px;
+  border: 1px solid var(--op-border);
+  background: var(--op-surface);
+  color: var(--op-text-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+
+  &--active {
+    background: var(--op-accent);
+    color: #fff;
+    border-color: var(--op-accent);
+  }
+
+  &:not(&--active):hover {
+    background: var(--op-accent-light);
+    color: var(--op-accent);
+    border-color: var(--op-accent-border);
   }
 }
 
