@@ -1,0 +1,54 @@
+categories:
+
+  - id: movies
+    label: Movies
+    icon: fas fa-film
+    items:
+      - title: "Blade Runner"
+        creator: "Ridley Scott"
+        image: "/images/favorites/blade-runner.png"
+        url: "https://www.imdb.com/title/tt0083658/"
+
+  - id: anime
+    label: Anime
+    icon: fas fa-tv
+    items:
+      - title: "Cowboy Bebop"
+        creator: "Shinichirō Watanabe"
+        image: "/images/favorites/cowboy-bebop.jpg"
+        url: "https://www.imdb.com/title/tt0213338/"
+
+  - id: books
+    label: Books
+    icon: fas fa-book
+    items:
+      - title: "The Unbearable Lightness of Being"
+        creator: "Milan Kundera"
+        image: "/images/favorites/the-unbearable-lightness-of-being.jpg"
+        url: "https://www.goodreads.com/book/show/9717.The_Unbearable_Lightness_of_Being"
+
+  - id: music
+    label: Music
+    icon: fas fa-music
+    items:
+      - title: "In Rainbows"
+        creator: "Radiohead"
+        image: "/images/favorites/in-rainbows.jpg"
+        url: "https://open.spotify.com/album/5vkqYmiPBYLaalcmjujWxK"
+
+  - id: games
+    label: Games
+    icon: fas fa-gamepad
+    items:
+      - title: "Baldur's Gate 3"
+        creator: "Larian Studios"
+        image: "/images/favorites/bg3.jpg"
+        url: "https://store.steampowered.com/app/1086940/"
+      - title: "Disco Elysium"
+        creator: "ZA/UM"
+        image: "/images/favorites/disco-elysium.jpg"
+        url: "https://store.steampowered.com/app/632470/"
+      - title: "Valheim"
+        creator: "Iron Gate AB"
+        image: "/images/favorites/valheim.jpg"
+        url: "https://store.steampowered.com/app/892970/"

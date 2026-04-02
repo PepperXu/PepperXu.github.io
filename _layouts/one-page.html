@@ -27,6 +27,9 @@ layout: compress
           <li><a href="#teaching">Teaching</a></li>
           {% if site.talks.size > 0 %}<li><a href="#talks">Talks</a></li>{% endif %}
           <li><a href="#resources">Resources</a></li>
+          {% if site.data.favorites %}
+          <li><a href="#favorites">Favorites</a></li>
+          {% endif %}
         </ul>
 
         <button type="button" class="op-nav__toggle" id="op-nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="op-nav-links">
@@ -320,6 +323,44 @@ layout: compress
 
       </div>
     </section>
+
+    <!-- ─── FAVORITES ────────────────────────────────────────── -->
+    {% if site.data.favorites and site.data.favorites.categories %}
+    <section id="favorites" class="op-section op-section--alt">
+      <div class="op-container">
+        <h2 class="op-section__title">Favorites</h2>
+        <div class="op-fav-grid">
+          {% for cat in site.data.favorites.categories %}
+          {% assign has_items = false %}
+          {% for item in cat.items %}
+            {% assign has_items = true %}
+          {% endfor %}
+          {% if has_items %}
+          <div class="op-fav-row">
+            <div class="op-fav-row__label">
+              <i class="{{ cat.icon }}" aria-hidden="true"></i>
+              <span>{{ cat.label }}</span>
+            </div>
+            <ul class="op-fav-list">
+              {% for item in cat.items %}
+              <li>
+                {% if item.url %}<a href="{{ item.url }}" class="op-fav-chip{% if item.image %} op-fav-chip--has-img{% endif %}" target="_blank" rel="noopener">{% else %}<span class="op-fav-chip{% if item.image %} op-fav-chip--has-img{% endif %}">{% endif %}
+                {% if item.image %}<img src="{{ item.image }}" alt="{{ item.title }}" class="op-fav-chip__img" loading="lazy" />{% endif %}
+                <span class="op-fav-chip__text">
+                  <span class="op-fav-chip__title">{{ item.title }}</span>
+                  {% if item.creator %}<span class="op-fav-chip__creator">{{ item.creator }}</span>{% endif %}
+                </span>
+                {% if item.url %}</a>{% else %}</span>{% endif %}
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endif %}
 
     <!-- ─── FOOTER ──────────────────────────────────────────── -->
     <div class="page__footer">

@@ -31,7 +31,22 @@
       "Bash(echo \"/tmp maps to C:\\\\\\\\Windows\\\\\\\\Temp or similar\")",
       "Bash(cmd.exe /c \"dir C:\\\\\\\\Windows\\\\\\\\Temp\\\\\\\\exp-final.png 2>nul\")",
       "Bash(grep -o \"//\" \"/c/Users/XPS83/Documents/GitHub/PepperXu.github.io/_site/index.html\")",
-      "Bash(grep -o '.\\\\{30\\\\}//.\\\\{60\\\\}' \"/c/Users/XPS83/Documents/GitHub/PepperXu.github.io/_site/index.html\")"
+      "Bash(grep -o '.\\\\{30\\\\}//.\\\\{60\\\\}' \"/c/Users/XPS83/Documents/GitHub/PepperXu.github.io/_site/index.html\")",
+      "Bash(curl -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" -o \"/c/Users/XPS83/Documents/GitHub/PepperXu.github.io/images/favorites/bg3.jpg\" \"https://cdn.akamai.steamstatic.com/steam/apps/1086940/library_600x900.jpg\")",
+      "Bash(curl -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" -o \"/c/Users/XPS83/Documents/GitHub/PepperXu.github.io/images/favorites/disco-elysium.jpg\" \"https://cdn.akamai.steamstatic.com/steam/apps/632470/library_600x900.jpg\")",
+      "Bash(curl -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" -o \"/c/Users/XPS83/Documents/GitHub/PepperXu.github.io/images/favorites/valheim.jpg\" \"https://cdn.akamai.steamstatic.com/steam/apps/892970/library_600x900.jpg\")",
+      "WebSearch",
+      "WebFetch(domain:musicbrainz.org)",
+      "WebFetch(domain:openlibrary.org)",
+      "WebFetch(domain:en.wikipedia.org)",
+      "Bash(curl -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" -o \"/c/Users/XPS83/Documents/GitHub/PepperXu.github.io/images/favorites/in-rainbows.jpg\" \"https://coverartarchive.org/release/a58f4eb2-9829-37d5-b46c-e8163038e0f5/3559497964.jpg\")",
+      "Bash(curl -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" -o \"/c/Users/XPS83/Documents/GitHub/PepperXu.github.io/images/favorites/the-unbearable-lightness-of-being.jpg\" \"https://covers.openlibrary.org/b/id/6572114-L.jpg\")",
+      "Bash(curl -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" -o \"/c/Users/XPS83/Documents/GitHub/PepperXu.github.io/images/favorites/blade-runner.jpg\" \"https://upload.wikimedia.org/wikipedia/en/9/9f/Blade_Runner_%281982_poster%29.png\")",
+      "Bash(curl -L -A \"Mozilla/5.0 \\(Windows NT 10.0; Win64; x64\\) AppleWebKit/537.36\" -o \"/c/Users/XPS83/Documents/GitHub/PepperXu.github.io/images/favorites/cowboy-bebop.jpg\" \"https://upload.wikimedia.org/wikipedia/en/a/a9/Cowboy_Bebop_key_visual.jpg\")",
+      "Bash(magick --version)",
+      "Bash(mv blade-runner.jpg blade-runner.png)",
+      "Bash(python3 -c ':*)",
+      "Bash(/c/Python313/python -c ':*)"
     ]
   }
 }
