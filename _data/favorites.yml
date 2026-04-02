@@ -5,6 +5,7 @@ categories:
     icon: fas fa-film
     items:
       - title: "Blade Runner"
+        title_zh: "银翼杀手"
         creator: "Ridley Scott"
         image: "/images/favorites/blade-runner.png"
         url: "https://www.imdb.com/title/tt0083658/"
@@ -14,6 +15,7 @@ categories:
     icon: fas fa-tv
     items:
       - title: "Cowboy Bebop"
+        title_zh: "星际牛仔"
         creator: "Shinichirō Watanabe"
         image: "/images/favorites/cowboy-bebop.jpg"
         url: "https://www.imdb.com/title/tt0213338/"
@@ -23,6 +25,7 @@ categories:
     icon: fas fa-book
     items:
       - title: "The Unbearable Lightness of Being"
+        title_zh: "不能承受的生命之轻"
         creator: "Milan Kundera"
         image: "/images/favorites/the-unbearable-lightness-of-being.jpg"
         url: "https://www.goodreads.com/book/show/9717.The_Unbearable_Lightness_of_Being"
@@ -41,18 +44,22 @@ categories:
     icon: fas fa-gamepad
     items:
       - title: "Baldur's Gate 3"
+        title_zh: "博德之门3"
         creator: "Larian Studios"
         image: "/images/favorites/bg3.jpg"
         url: "https://store.steampowered.com/app/1086940/"
       - title: "Disco Elysium"
+        title_zh: "极乐迪斯科"
         creator: "ZA/UM"
         image: "/images/favorites/disco-elysium.jpg"
         url: "https://store.steampowered.com/app/632470/"
       - title: "Valheim"
+        title_zh: "英灵神殿"
         creator: "Iron Gate AB"
         image: "/images/favorites/valheim.jpg"
         url: "https://store.steampowered.com/app/892970/"
       - title: "EVE Online"
+        title_zh: "星战前夜"
         creator: "CCP Games"
         image: "/images/favorites/eve-online.jpg"
         url: "https://www.eveonline.com/"

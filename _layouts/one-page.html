@@ -8,29 +8,35 @@ layout: compress
 <html lang="{{ site.locale | slice: 0,2 }}" class="no-js">
   <head>
     {% include head.html %}
+    <script>(function(){try{var l=localStorage.getItem('op-lang');if(l==='zh'){document.documentElement.classList.add('op-body--zh');}}catch(e){}})();</script>
     {% include head/custom.html %}
   </head>
 
-  <body class="op-body">
+  <body class="op-body" id="op-body">
 
     {% include browser-upgrade.html %}
 
     <!-- ─── STICKY NAV ─────────────────────────────────────── -->
     <nav class="op-nav" id="op-nav" aria-label="Page sections">
       <div class="op-nav__inner">
-        <a class="op-nav__brand" href="#about">{{ site.author.name }}</a>
+        <a class="op-nav__brand" href="#about"><span class="op-lang-en">{{ site.author.name }}</span>{% if site.author.name_zh %}<span class="op-lang-zh">{{ site.author.name_zh }}</span>{% endif %}</a>
 
         <ul class="op-nav__links" id="op-nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#publications">Publications</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#teaching">Teaching</a></li>
-          {% if site.talks.size > 0 %}<li><a href="#talks">Talks</a></li>{% endif %}
-          <li><a href="#resources">Resources</a></li>
+          <li><a href="#about"><span data-en="About" data-zh="关于我">About</span></a></li>
+          <li><a href="#publications"><span data-en="Publications" data-zh="发表论文">Publications</span></a></li>
+          <li><a href="#experience"><span data-en="Experience" data-zh="经历">Experience</span></a></li>
+          <li><a href="#teaching"><span data-en="Teaching" data-zh="教学">Teaching</span></a></li>
+          {% if site.talks.size > 0 %}<li><a href="#talks"><span data-en="Talks" data-zh="演讲">Talks</span></a></li>{% endif %}
+          <li><a href="#resources"><span data-en="Resources" data-zh="资源">Resources</span></a></li>
           {% if site.data.favorites %}
-          <li><a href="#favorites">Favorites</a></li>
+          <li><a href="#favorites"><span data-en="Favorites" data-zh="个人喜好">Favorites</span></a></li>
           {% endif %}
         </ul>
+
+        <button type="button" class="op-nav__lang" id="op-lang-toggle" aria-label="Switch language">
+          <span class="op-nav__lang-seg op-nav__lang-seg--active" id="op-lang-en-seg">EN</span>
+          <span class="op-nav__lang-seg" id="op-lang-zh-seg">中</span>
+        </button>
 
         <button type="button" class="op-nav__toggle" id="op-nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="op-nav-links">
           <span></span><span></span><span></span>
@@ -52,16 +58,20 @@ layout: compress
           </div>
 
           <div class="op-hero__content">
-            <h1 class="op-hero__name">{{ site.author.name }}</h1>
-            <p class="op-hero__subtitle">{{ site.author.bio }}</p>
+            <h1 class="op-hero__name"><span class="op-lang-en">{{ site.author.name }}</span>{% if site.author.name_zh %}<span class="op-lang-zh">{{ site.author.name_zh }}</span>{% endif %}</h1>
+            <p class="op-hero__subtitle">
+              <span class="op-lang-en">{{ site.author.bio }}</span>
+              {% if site.author.bio_zh %}<span class="op-lang-zh">{{ site.author.bio_zh }}</span>{% endif %}
+            </p>
             <p class="op-hero__meta">
-              <i class="fas fa-building-columns" aria-hidden="true"></i>&thinsp;{{ site.author.employer }}
+              <i class="fas fa-building-columns" aria-hidden="true"></i>&thinsp;{% if site.author.employer_zh %}<span class="op-lang-en">{{ site.author.employer }}</span><span class="op-lang-zh">{{ site.author.employer_zh }}</span>{% else %}{{ site.author.employer }}{% endif %}
               &ensp;&middot;&ensp;
-              <i class="fas fa-location-dot" aria-hidden="true"></i>&thinsp;{{ site.author.location }}
+              <i class="fas fa-location-dot" aria-hidden="true"></i>&thinsp;{% if site.author.location_zh %}<span class="op-lang-en">{{ site.author.location }}</span><span class="op-lang-zh">{{ site.author.location_zh }}</span>{% else %}{{ site.author.location }}{% endif %}
             </p>
 
             <div class="op-hero__bio">
-              {{ content }}
+              <div class="op-lang-en">{{ content }}</div>
+              {% if page.bio_zh %}<div class="op-lang-zh">{{ page.bio_zh | markdownify }}</div>{% endif %}
             </div>
 
             <div class="op-hero__links">
@@ -103,11 +113,11 @@ layout: compress
     <!-- ─── PUBLICATIONS ────────────────────────────────────── -->
     <section id="publications" class="op-section op-section--alt">
       <div class="op-container">
-        <h2 class="op-section__title">Publications</h2>
+        <h2 class="op-section__title"><span data-en="Publications" data-zh="发表论文">Publications</span></h2>
 
         {% assign featured_pubs = site.publications | where: "featured", true %}
         {% if featured_pubs.size > 0 %}
-          <h3 class="op-subsection__title">Highlighted Publications</h3>
+          <h3 class="op-subsection__title"><span data-en="Highlighted Publications" data-zh="重点论文">Highlighted Publications</span></h3>
           <div class="op-pub-grid op-pub-grid--featured">
             {% for pub in featured_pubs reversed %}
             <article class="op-pub-card op-pub-card--featured">
@@ -147,16 +157,21 @@ layout: compress
                 {% endif %}
                 <p class="op-pub-card__venue"><em>{{ pub.venue }}</em> &middot; {{ pub.date | date: "%Y" }}</p>
                 {% if pub.description %}
-                  <p class="op-pub-card__desc">{{ pub.description }}</p>
+                  {% if pub.description_zh %}
+                    <p class="op-pub-card__desc op-lang-en">{{ pub.description }}</p>
+                    <p class="op-pub-card__desc op-lang-zh">{{ pub.description_zh }}</p>
+                  {% else %}
+                    <p class="op-pub-card__desc">{{ pub.description }}</p>
+                  {% endif %}
                 {% elsif pub.excerpt %}
                   <p class="op-pub-card__desc">{{ pub.excerpt | strip_html | truncatewords: 45 }}</p>
                 {% endif %}
                 <div class="op-pub-card__links">
-                  {% if pub.paperurl %}<a href="{{ pub.paperurl }}" class="op-tag" target="_blank" rel="noopener">Paper</a>{% endif %}
-                  {% if pub.videourl %}<a href="{{ pub.videourl }}" class="op-tag" target="_blank" rel="noopener">Video</a>{% endif %}
-                  {% if pub.demourl %}<a href="{{ pub.demourl }}" class="op-tag" target="_blank" rel="noopener">Demo</a>{% endif %}
-                  {% if pub.slidesurl %}<a href="{{ pub.slidesurl }}" class="op-tag" target="_blank" rel="noopener">Slides</a>{% endif %}
-                  {% if pub.codeurl %}<a href="{{ pub.codeurl }}" class="op-tag" target="_blank" rel="noopener">Code</a>{% endif %}
+                  {% if pub.paperurl %}<a href="{{ pub.paperurl }}" class="op-tag" target="_blank" rel="noopener"><span data-en="Paper" data-zh="论文">Paper</span></a>{% endif %}
+                  {% if pub.videourl %}<a href="{{ pub.videourl }}" class="op-tag" target="_blank" rel="noopener"><span data-en="Video" data-zh="视频">Video</span></a>{% endif %}
+                  {% if pub.demourl %}<a href="{{ pub.demourl }}" class="op-tag" target="_blank" rel="noopener"><span data-en="Demo" data-zh="演示">Demo</span></a>{% endif %}
+                  {% if pub.slidesurl %}<a href="{{ pub.slidesurl }}" class="op-tag" target="_blank" rel="noopener"><span data-en="Slides" data-zh="幻灯片">Slides</span></a>{% endif %}
+                  {% if pub.codeurl %}<a href="{{ pub.codeurl }}" class="op-tag" target="_blank" rel="noopener"><span data-en="Code" data-zh="代码">Code</span></a>{% endif %}
                 </div>
               </div>
             </article>
@@ -164,11 +179,11 @@ layout: compress
           </div>
         {% endif %}
 
-        <h3 class="op-subsection__title">All Publications</h3>
+        <h3 class="op-subsection__title"><span data-en="All Publications" data-zh="全部论文">All Publications</span></h3>
         {% if site.author.googlescholar %}
         <p class="op-pub-scholar">
           <a href="{{ site.author.googlescholar }}" target="_blank" rel="noopener">
-            <i class="fas fa-graduation-cap" aria-hidden="true"></i> View full list on Google Scholar
+            <i class="fas fa-graduation-cap" aria-hidden="true"></i> <span data-en="View full list on Google Scholar" data-zh="在谷歌学术查看完整列表">View full list on Google Scholar</span>
           </a>
         </p>
         {% endif %}
@@ -198,11 +213,11 @@ layout: compress
               {% endif %}
               <p class="op-pub-card__venue"><em>{{ pub.venue }}</em> &middot; {{ pub.date | date: "%Y" }}</p>
               <div class="op-pub-card__links">
-                {% if pub.paperurl %}<a href="{{ pub.paperurl }}" class="op-tag op-tag--sm" target="_blank" rel="noopener">Paper</a>{% endif %}
-                {% if pub.videourl %}<a href="{{ pub.videourl }}" class="op-tag op-tag--sm" target="_blank" rel="noopener">Video</a>{% endif %}
-                {% if pub.demourl %}<a href="{{ pub.demourl }}" class="op-tag op-tag--sm" target="_blank" rel="noopener">Demo</a>{% endif %}
-                {% if pub.slidesurl %}<a href="{{ pub.slidesurl }}" class="op-tag op-tag--sm" target="_blank" rel="noopener">Slides</a>{% endif %}
-                {% if pub.codeurl %}<a href="{{ pub.codeurl }}" class="op-tag op-tag--sm" target="_blank" rel="noopener">Code</a>{% endif %}
+                {% if pub.paperurl %}<a href="{{ pub.paperurl }}" class="op-tag op-tag--sm" target="_blank" rel="noopener"><span data-en="Paper" data-zh="论文">Paper</span></a>{% endif %}
+                {% if pub.videourl %}<a href="{{ pub.videourl }}" class="op-tag op-tag--sm" target="_blank" rel="noopener"><span data-en="Video" data-zh="视频">Video</span></a>{% endif %}
+                {% if pub.demourl %}<a href="{{ pub.demourl }}" class="op-tag op-tag--sm" target="_blank" rel="noopener"><span data-en="Demo" data-zh="演示">Demo</span></a>{% endif %}
+                {% if pub.slidesurl %}<a href="{{ pub.slidesurl }}" class="op-tag op-tag--sm" target="_blank" rel="noopener"><span data-en="Slides" data-zh="幻灯片">Slides</span></a>{% endif %}
+                {% if pub.codeurl %}<a href="{{ pub.codeurl }}" class="op-tag op-tag--sm" target="_blank" rel="noopener"><span data-en="Code" data-zh="代码">Code</span></a>{% endif %}
               </div>
             </div>
           </article>
@@ -216,22 +231,25 @@ layout: compress
     {% if site.data.experience %}
     <section id="experience" class="op-section">
       <div class="op-container">
-        <h2 class="op-section__title">Experience</h2>
+        <h2 class="op-section__title"><span data-en="Experience" data-zh="经历">Experience</span></h2>
 
         {% if site.data.experience.education %}
-        <h3 class="op-subsection__title">Education</h3>
+        <h3 class="op-subsection__title"><span data-en="Education" data-zh="教育背景">Education</span></h3>
         <div class="op-timeline">
           {% for item in site.data.experience.education %}
           <div class="op-timeline__item">
             <div class="op-timeline__dot"></div>
             <div class="op-timeline__content">
               <div class="op-timeline__header">
-                <h4 class="op-timeline__title">{{ item.degree }}{% if item.field %} &mdash; {{ item.field }}{% endif %}</h4>
+                <h4 class="op-timeline__title">
+                  <span class="op-lang-en">{{ item.degree }}{% if item.field %} &mdash; {{ item.field }}{% endif %}</span>
+                  {% if item.degree_zh %}<span class="op-lang-zh">{{ item.degree_zh }}{% if item.field_zh %} &mdash; {{ item.field_zh }}{% endif %}</span>{% endif %}
+                </h4>
                 <span class="op-timeline__period">{{ item.period }}</span>
               </div>
-              <p class="op-timeline__inst">{{ item.institution }}</p>
-              {% if item.advisors %}<p class="op-timeline__detail">Advisors: {{ item.advisors }}</p>{% endif %}
-              {% if item.collab %}<p class="op-timeline__detail">Collaborator: {{ item.collab }}</p>{% endif %}
+              <p class="op-timeline__inst">{% if item.institution_zh %}<span class="op-lang-en">{{ item.institution }}</span><span class="op-lang-zh">{{ item.institution_zh }}</span>{% else %}{{ item.institution }}{% endif %}</p>
+              {% if item.advisors %}<p class="op-timeline__detail"><span data-en="Advisors" data-zh="导师">Advisors</span>: {{ item.advisors }}</p>{% endif %}
+              {% if item.collab %}<p class="op-timeline__detail"><span data-en="Collaborator" data-zh="合作者">Collaborator</span>: {{ item.collab }}</p>{% endif %}
             </div>
           </div>
           {% endfor %}
@@ -239,17 +257,19 @@ layout: compress
         {% endif %}
 
         {% if site.data.experience.work %}
-        <h3 class="op-subsection__title">Work</h3>
+        <h3 class="op-subsection__title"><span data-en="Work" data-zh="工作经历">Work</span></h3>
         <div class="op-timeline">
           {% for item in site.data.experience.work %}
           <div class="op-timeline__item">
             <div class="op-timeline__dot"></div>
             <div class="op-timeline__content">
               <div class="op-timeline__header">
-                <h4 class="op-timeline__title">{{ item.role }}</h4>
+                <h4 class="op-timeline__title">
+                  {% if item.role_zh %}<span class="op-lang-en">{{ item.role }}</span><span class="op-lang-zh">{{ item.role_zh }}</span>{% else %}{{ item.role }}{% endif %}
+                </h4>
                 <span class="op-timeline__period">{{ item.period }}</span>
               </div>
-              <p class="op-timeline__inst">{{ item.institution }}</p>
+              <p class="op-timeline__inst">{% if item.institution_zh %}<span class="op-lang-en">{{ item.institution }}</span><span class="op-lang-zh">{{ item.institution_zh }}</span>{% else %}{{ item.institution }}{% endif %}</p>
               {% if item.description %}<p class="op-timeline__detail">{{ item.description }}</p>{% endif %}
             </div>
           </div>
@@ -266,7 +286,7 @@ layout: compress
     {% if teachings.size > 0 %}
     <section id="teaching" class="op-section op-section--alt">
       <div class="op-container">
-        <h2 class="op-section__title">Teaching</h2>
+        <h2 class="op-section__title"><span data-en="Teaching" data-zh="教学">Teaching</span></h2>
         <ul class="op-teaching-list">
           {% for item in teachings %}
           <li class="op-teaching-item">
@@ -275,8 +295,8 @@ layout: compress
               <span class="op-teaching-type">{{ item.type }}</span>
             </div>
             <div class="op-teaching-body">
-              <h4 class="op-teaching-title">{{ item.title }}</h4>
-              <p class="op-teaching-venue">{{ item.venue }}</p>
+              <h4 class="op-teaching-title">{% if item.title_zh %}<span class="op-lang-en">{{ item.title }}</span><span class="op-lang-zh">{{ item.title_zh }}</span>{% else %}{{ item.title }}{% endif %}</h4>
+              <p class="op-teaching-venue">{% if item.venue_zh %}<span class="op-lang-en">{{ item.venue }}</span><span class="op-lang-zh">{{ item.venue_zh }}</span>{% else %}{{ item.venue }}{% endif %}</p>
               <div class="op-teaching-content">{{ item.content }}</div>
             </div>
           </li>
@@ -290,7 +310,7 @@ layout: compress
     {% if site.talks.size > 0 %}
     <section id="talks" class="op-section">
       <div class="op-container">
-        <h2 class="op-section__title">Talks</h2>
+        <h2 class="op-section__title"><span data-en="Talks" data-zh="演讲">Talks</span></h2>
         <ul class="op-talks-list">
           {% for talk in site.talks reversed %}
           <li class="op-talk-item">
@@ -311,10 +331,10 @@ layout: compress
     <!-- ─── RESOURCES ───────────────────────────────────────── -->
     <section id="resources" class="op-section {% if site.talks.size > 0 %}op-section--alt{% endif %}">
       <div class="op-container">
-        <h2 class="op-section__title">Resources</h2>
+        <h2 class="op-section__title"><span data-en="Resources" data-zh="资源">Resources</span></h2>
 
         {% if site.data.resources and site.data.resources.external and site.data.resources.external.size > 0 %}
-        <h3 class="op-subsection__title">External Links</h3>
+        <h3 class="op-subsection__title"><span data-en="External Links" data-zh="外部链接">External Links</span></h3>
         <div class="op-resources-grid op-resources-grid--links">
           {% for res in site.data.resources.external %}
           <a href="{{ res.url }}" class="op-resource-card op-resource-card--link" target="_blank" rel="noopener">
@@ -341,7 +361,7 @@ layout: compress
     {% if site.data.favorites and site.data.favorites.categories %}
     <section id="favorites" class="op-section op-section--alt">
       <div class="op-container">
-        <h2 class="op-section__title">Favorites</h2>
+        <h2 class="op-section__title"><span data-en="Favorites" data-zh="个人喜好">Favorites</span></h2>
         <div class="op-fav-grid">
           {% for cat in site.data.favorites.categories %}
           {% assign has_items = false %}
@@ -352,7 +372,8 @@ layout: compress
           <div class="op-fav-row">
             <div class="op-fav-row__label">
               <i class="{{ cat.icon }}" aria-hidden="true"></i>
-              <span>{{ cat.label }}</span>
+              {% assign i18n_cat = site.data.i18n.favorites_categories[cat.id] %}
+              <span data-en="{{ i18n_cat.en | default: cat.label }}" data-zh="{{ i18n_cat.zh | default: cat.label }}">{{ i18n_cat.en | default: cat.label }}</span>
             </div>
             <ul class="op-fav-list">
               {% for item in cat.items %}
@@ -360,7 +381,7 @@ layout: compress
                 {% if item.url %}<a href="{{ item.url }}" class="op-fav-chip{% if item.image %} op-fav-chip--has-img{% endif %}" target="_blank" rel="noopener">{% else %}<span class="op-fav-chip{% if item.image %} op-fav-chip--has-img{% endif %}">{% endif %}
                 {% if item.image %}<img src="{{ item.image }}" alt="{{ item.title }}" class="op-fav-chip__img" loading="lazy" />{% endif %}
                 <span class="op-fav-chip__text">
-                  <span class="op-fav-chip__title">{{ item.title }}</span>
+                  <span class="op-fav-chip__title">{% if item.title_zh %}<span class="op-lang-en">{{ item.title }}</span><span class="op-lang-zh">{{ item.title_zh }}</span>{% else %}{{ item.title }}{% endif %}</span>
                   {% if item.creator %}<span class="op-fav-chip__creator">{{ item.creator }}</span>{% endif %}
                 </span>
                 {% if item.url %}</a>{% else %}</span>{% endif %}
@@ -479,6 +500,39 @@ layout: compress
           });
         });
       });
+
+      /* ── Language switcher ────────────────────────────────── */
+      var _currentLang = 'en';
+      try { _currentLang = localStorage.getItem('op-lang') || 'en'; } catch(e) {}
+
+      function applyLang(lang) {
+        var isZh = (lang === 'zh');
+        document.documentElement.classList.toggle('op-body--zh', isZh);
+        document.body.classList.toggle('op-body--zh', isZh);
+        var dataSpans = document.querySelectorAll('[data-en][data-zh]');
+        for (var i = 0; i < dataSpans.length; i++) {
+          dataSpans[i].textContent = isZh ? dataSpans[i].getAttribute('data-zh') : dataSpans[i].getAttribute('data-en');
+        }
+        var enSeg = document.getElementById('op-lang-en-seg');
+        var zhSeg = document.getElementById('op-lang-zh-seg');
+        if (enSeg && zhSeg) {
+          enSeg.classList.toggle('op-nav__lang-seg--active', !isZh);
+          zhSeg.classList.toggle('op-nav__lang-seg--active', isZh);
+        }
+      }
+
+      applyLang(_currentLang);
+
+      var langBtn = document.getElementById('op-lang-toggle');
+      if (langBtn) {
+        langBtn.addEventListener('click', function () {
+          var next = (_currentLang === 'en') ? 'zh' : 'en';
+          _currentLang = next;
+          try { localStorage.setItem('op-lang', next); } catch(e) {}
+          applyLang(next);
+        });
+      }
+
     })();
     </script>
 

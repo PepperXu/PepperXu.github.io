@@ -1,0 +1,41 @@
+nav:
+  about:       { en: "About",        zh: "关于我"   }
+  publications: { en: "Publications", zh: "发表论文" }
+  experience:  { en: "Experience",   zh: "经历"     }
+  teaching:    { en: "Teaching",     zh: "教学"     }
+  talks:       { en: "Talks",        zh: "演讲"     }
+  resources:   { en: "Resources",    zh: "资源"     }
+  favorites:   { en: "Favorites",    zh: "个人喜好" }
+
+sections:
+  about:        { en: "About",        zh: "关于我"   }
+  publications: { en: "Publications", zh: "发表论文" }
+  experience:   { en: "Experience",   zh: "经历"     }
+  teaching:     { en: "Teaching",     zh: "教学"     }
+  talks:        { en: "Talks",        zh: "演讲"     }
+  resources:    { en: "Resources",    zh: "资源"     }
+  favorites:    { en: "Favorites",    zh: "个人喜好" }
+
+subsections:
+  highlighted_publications: { en: "Highlighted Publications", zh: "重点论文"   }
+  all_publications:         { en: "All Publications",         zh: "全部论文"   }
+  education:                { en: "Education",                zh: "教育背景"   }
+  work:                     { en: "Work",                     zh: "工作经历"   }
+  external_links:           { en: "External Links",           zh: "外部链接"   }
+
+labels:
+  advisors:      { en: "Advisors",                          zh: "导师"                   }
+  collaborator:  { en: "Collaborator",                      zh: "合作者"                 }
+  google_scholar: { en: "View full list on Google Scholar", zh: "在谷歌学术查看完整列表" }
+  paper:         { en: "Paper",                             zh: "论文"                   }
+  video:         { en: "Video",                             zh: "视频"                   }
+  demo:          { en: "Demo",                              zh: "演示"                   }
+  slides:        { en: "Slides",                            zh: "幻灯片"                 }
+  code:          { en: "Code",                              zh: "代码"                   }
+
+favorites_categories:
+  movies: { en: "Movies", zh: "电影" }
+  anime:  { en: "Anime",  zh: "动漫" }
+  books:  { en: "Books",  zh: "书籍" }
+  music:  { en: "Music",  zh: "音乐" }
+  games:  { en: "Games",  zh: "游戏" }

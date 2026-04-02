@@ -1,9 +1,11 @@
 ---
 title: "Teaching Assistant (2025 Spring)"
+title_zh: "助教（2025年春季学期）"
 collection: teaching
 type: "Undergrad course"
 permalink: /teaching/2025-spring
 venue: "National University of Singapore, Computer Science"
+venue_zh: "新加坡国立大学，计算机科学系"
 date: 2025-01-01
 location: "Singapore, Singapore"
 ---

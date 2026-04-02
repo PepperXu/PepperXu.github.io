@@ -1,9 +1,11 @@
 ---
 title: "Teaching Assistant (2024 Autumn)"
+title_zh: "助教（2024年秋季学期）"
 collection: teaching
 type: "Undergrad course"
 permalink: /teaching/2024-autumn
 venue: "National University of Singapore, Computer Science"
+venue_zh: "新加坡国立大学，计算机科学系"
 date: 2024-08-01
 location: "Singapore, Singapore"
 ---

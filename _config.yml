@@ -24,11 +24,15 @@ repository               : "PepperXu/PepperXu.github.io"
 author:
   # Biographic information
   avatar           : "avatar/avatar-test.jpg"
-  name             : "Peisen"
+  name             : "Xu Peisen"
+  name_zh          : "徐培森"
   pronouns         : # example: "she/her"  
   bio              : "PhD candidate in Human Computer Interaction."
+  bio_zh           : "人机交互博士生"
   location         : "Singapore"
+  location_zh      : "新加坡"
   employer         : "National University of Singapore"
+  employer_zh      : "新加坡国立大学"
   uri              : # URL
   email            : "ps.xu@nus.edu.sg" 
 
@@ -136,6 +140,7 @@ exclude:
   - "*.sublime-workspace"
   - .asset-cache
   - .bundle
+  - .claude
   - .github
   - .jekyll-assets-cache
   - .sass-cache
