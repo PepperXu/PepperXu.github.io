@@ -12,5 +12,5 @@ I am a PhD candidate at National University of Singapore, advised by [Prof. Wei 
 
 My research focuses on Human-Drone Interaction, Design for Specialized User Groups, Virtual/Augmented/Mixed Reality, and 3D Heads-up Interface Design and System Implementation. I am also enthusiastic about video game design and development and 3D real-time visual effects. 
 
-I previously graduadated with a Master of Arts degree and a Bachelor of Engineering degree from Nanyang Technological University. I grew up in Tianjin, China. Recently in my free time, I enjoy cycling, making musics and playing RPG games (Skyrim, Baldur's Gate 3). 
+I previously graduadated with a Master of Arts degree and a Bachelor of Engineering degree from Nanyang Technological University. I grew up in Tianjin, China. Recently in my free time, I enjoy cycling, making musics and playing RPG games. 
 

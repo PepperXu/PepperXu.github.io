@@ -100,6 +100,10 @@
     padding: 8px 6px;
     border-radius: 6px;
     flex-shrink: 0;
+    position: relative;
+    z-index: 10001;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 
     span {
       display: block;
@@ -846,8 +850,9 @@
       flex-direction: column;
       gap: 0.15rem;
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      z-index: 10000;
 
-      &--open { display: flex; }
+      &--open { display: flex !important; }
 
       a {
         padding: 0.55rem 0.9rem;
@@ -859,6 +864,8 @@
 
     &__toggle { display: flex; }
   }
+
+  .op-section { padding: 2.75rem 0; }
 
   .op-hero {
     padding-top: calc(var(--op-nav-height) + 1.5rem);
@@ -879,8 +886,6 @@
     &__name { font-size: 2rem; }
     &__links { justify-content: center; }
   }
-
-  .op-section { padding: 2.75rem 0; }
 
   .op-pub-grid--featured {
     grid-template-columns: 1fr;

@@ -3,11 +3,15 @@ title: "Towards modelling of visual saliency in point clouds for immersive appli
 collection: publications
 category: conferences
 permalink: /publication/2019-point-cloud-saliency
-excerpt: '[Video](https://www.youtube.com/watch?v=7MVdrJXVvfQ) - [Code](https://github.com/PepperXu/drone-safety-sim)'
+authors: "Alexiou, E., Xu, P.& Ebrahimi, T."
+award: "Top 10% Paper"
 date: 2019-09-22
 venue: "ICIP '19"
-paperurl: 'https://arxiv.org/pdf/2504.16533'
-citation: 'Xu, P., Garcia, J., Ooi, W. T., & Jouffrais, C. (2025, April). SafeSpect: Safety-First Augmented Reality Heads-up Display for Drone Inspections. In <i>Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems</i> (pp. 1-17).'
+paperurl: 'https://doi.org/10.1109/ICIP.2019.8803479'
+codeurl: 'https://github.com/PepperXu/PCA_EPFL'
+citation: 'E. Alexiou, P. Xu and T. Ebrahimi, Towards Modelling of Visual Saliency in Point Clouds for Immersive Applications, 2019 IEEE International Conference on Image Processing (ICIP), Taipei, Taiwan, 2019, pp. 4325-4329, doi: 10.1109/ICIP.2019.8803479.'
+header:
+   teaser: "/images/point-cloud-saliency/teaser.png"
 ---
 
 

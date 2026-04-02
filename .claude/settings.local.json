@@ -29,7 +29,9 @@
       "Bash(wslpath -w /tmp/exp-final.png)",
       "Bash(cygpath -w /tmp/exp-final.png)",
       "Bash(echo \"/tmp maps to C:\\\\\\\\Windows\\\\\\\\Temp or similar\")",
-      "Bash(cmd.exe /c \"dir C:\\\\\\\\Windows\\\\\\\\Temp\\\\\\\\exp-final.png 2>nul\")"
+      "Bash(cmd.exe /c \"dir C:\\\\\\\\Windows\\\\\\\\Temp\\\\\\\\exp-final.png 2>nul\")",
+      "Bash(grep -o \"//\" \"/c/Users/XPS83/Documents/GitHub/PepperXu.github.io/_site/index.html\")",
+      "Bash(grep -o '.\\\\{30\\\\}//.\\\\{60\\\\}' \"/c/Users/XPS83/Documents/GitHub/PepperXu.github.io/_site/index.html\")"
     ]
   }
 }

@@ -29,7 +29,7 @@ layout: compress
           <li><a href="#resources">Resources</a></li>
         </ul>
 
-        <button class="op-nav__toggle" id="op-nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <button type="button" class="op-nav__toggle" id="op-nav-toggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="op-nav-links">
           <span></span><span></span><span></span>
         </button>
       </div>
@@ -318,30 +318,6 @@ layout: compress
         </div>
         {% endif %}
 
-        {% if site.posts.size > 0 %}
-        <h3 class="op-subsection__title">Blog Posts</h3>
-        <div class="op-resources-grid">
-          {% for post in site.posts %}
-          <a href="{{ post.url | prepend: base_path }}" class="op-resource-card">
-            {% if post.header.teaser %}
-            <div class="op-resource-card__img">
-              <img src="{{ post.header.teaser | prepend: base_path }}" alt="{{ post.title }}" loading="lazy" />
-            </div>
-            {% else %}
-            <div class="op-resource-card__icon op-resource-card__icon--post">
-              <i class="fas fa-pen-nib" aria-hidden="true"></i>
-            </div>
-            {% endif %}
-            <div class="op-resource-card__body">
-              <h4 class="op-resource-card__title">{{ post.title }}</h4>
-              <p class="op-resource-card__date">{{ post.date | date: "%B %Y" }}</p>
-              {% if post.excerpt %}<p class="op-resource-card__desc">{{ post.excerpt | strip_html | truncatewords: 18 }}</p>{% endif %}
-            </div>
-          </a>
-          {% endfor %}
-        </div>
-        {% endif %}
-
       </div>
     </section>
 
@@ -363,25 +339,49 @@ layout: compress
       var toggle = document.getElementById('op-nav-toggle');
       var links = document.getElementById('op-nav-links');
 
-      // Mobile toggle
+      function setMenuState(open) {
+        links.classList.toggle('op-nav__links--open', open);
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      }
+
       if (toggle && links) {
-        toggle.addEventListener('click', function () {
-          var open = links.classList.toggle('op-nav__links--open');
-          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        var _touched = false;
+
+        function _doToggle() {
+          var open = !links.classList.contains('op-nav__links--open');
+          setMenuState(open);
+        }
+
+        toggle.addEventListener('touchend', function (event) {
+          event.preventDefault();
+          _touched = true;
+          _doToggle();
+          setTimeout(function () { _touched = false; }, 600);
+        }, { passive: false });
+
+        toggle.addEventListener('click', function (event) {
+          event.stopPropagation();
+          if (_touched) { _touched = false; return; }
+          _doToggle();
         });
       }
 
-      // Close mobile menu when a link is clicked
       if (links) {
-        links.querySelectorAll('a').forEach(function (a) {
+        Array.prototype.forEach.call(links.querySelectorAll('a'), function (a) {
           a.addEventListener('click', function () {
-            links.classList.remove('op-nav__links--open');
-            toggle && toggle.setAttribute('aria-expanded', 'false');
+            setMenuState(false);
           });
         });
       }
 
-      // Active section highlight via IntersectionObserver
+      document.addEventListener('click', function (event) {
+        if (!links || !toggle) return;
+        if (!links.classList.contains('op-nav__links--open')) return;
+        if (nav && !nav.contains(event.target)) {
+          setMenuState(false);
+        }
+      });
+
       var sections = document.querySelectorAll('section[id]');
       var navLinks = document.querySelectorAll('.op-nav__links a');
 
@@ -400,7 +400,6 @@ layout: compress
 
         sections.forEach(function (s) { observer.observe(s); });
       } else {
-        // Fallback: scroll-based
         window.addEventListener('scroll', function () {
           var scrollY = window.scrollY;
           var current = '';

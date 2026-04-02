@@ -4,21 +4,29 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Personal academic portfolio website for Xu Peisen (PhD candidate in HCI at NUS), built with Jekyll and hosted on GitHub Pages. The site showcases research (Mixed Reality, Human-Drone Interaction), publications, teaching, and blog posts.
+Personal academic portfolio website for Xu Peisen (PhD candidate in HCI at NUS), built with Jekyll and hosted on GitHub Pages.
+
+The repository is intentionally minimal and one-page focused:
+- Single homepage layout only (`_layouts/one-page.html`)
+- Light-theme-only behavior
+- Content collections rendered inline on homepage (`publications`, `teaching`, `talks`)
+- No multi-page post/archive/comment/analytics template stack
 
 ## Development Commands
 
 ### Local Development
 ```bash
 bundle install          # Install Ruby gems
-jekyll serve -l -H localhost  # Serve with live reload at http://localhost:4000
-# or
 bundle exec jekyll serve -l -H localhost
 ```
 
 ### Docker Development
 ```bash
-docker compose up       # Build and run (port 4000, LiveReload on 35729)
+# Standard compose command (may fail if lockfile gems are not yet materialized in container)
+docker compose up --build
+
+# Reliable verification flow for this repo state
+docker compose run --service-ports --rm jekyll-site sh -lc "bundle install; bundle exec jekyll serve -H 0.0.0.0 -w --config _config.yml,_config_docker.yml --livereload --force_polling"
 ```
 
 ### JavaScript Build
@@ -26,18 +34,6 @@ docker compose up       # Build and run (port 4000, LiveReload on 35729)
 npm install             # Install Node.js dependencies
 npm run build:js        # Minify JS (outputs to assets/js/main.min.js)
 npm run watch:js        # Watch and rebuild on changes
-```
-
-### Content Generation (Python tools in `markdown_generator/`)
-```bash
-python publications.py  # Generate publication .md files from publications.tsv
-python talks.py         # Generate talk .md files from talks.tsv
-python pubsFromBib.py   # Generate publications from a BibTeX file
-```
-
-### CV Update
-```bash
-./scripts/update_cv_json.sh  # Convert CV markdown to _data/cv.json
 ```
 
 ## Architecture
@@ -50,21 +46,27 @@ Styles for the one-page layout live in `_sass/layout/_one-page.scss`, imported l
 ### Content Structure
 - **`_publications/`** — Academic papers. Key front matter: `title`, `venue`, `date`, `category` (`conferences`/`manuscripts`/`books`), `paperurl`, `videourl`, `codeurl`, `demourl`, `slidesurl`. Set `featured: true` to appear in the highlighted grid. Set `award:` for an award badge. Add `header: { teaser: "images/filename.jpg" }` for a feature figure.
 - **`_teaching/`** — Teaching entries rendered as a list on the homepage.
-- **`_posts/`** — Blog posts, shown as cards in the Resources section.
+- **`_talks/`** — Talks rendered as a list on the homepage.
 - **`_data/experience.yml`** — Education/work timeline data for the Experience section.
 - **`_data/resources.yml`** — External links for the Resources section (`external` key, each with `title`, `url`, `icon`, `description`).
-- **`_data/`** — Also: `navigation.yml`, `cv.json`, `authors.yml`, `ui-text.yml`.
-- **`_layouts/`** and **`_includes/`** — Liquid HTML templates; `default.html` wraps `compress.html`; `one-page.html` extends `compress.html` directly.
+- **`_data/`** — Also includes `authors.yml` and `ui-text.yml`.
+- **`_layouts/`** — Minimal set: `compress.html`, `one-page.html`.
+- **`_includes/`** — Minimal set used by one-page: `base_path`, `head.html`, `head/custom.html`, `browser-upgrade.html`, `footer.html`, `footer/custom.html`, `scripts.html`, `seo.html`.
 - **`_sass/`** — SCSS source; compiled CSS lives in `assets/css/`.
 
 ### Jekyll Collections
-Four collections in `_config.yml`: `publications`, `teaching`, `portfolio`, `talks`. The one-page layout pulls from `site.publications`, `site.teaching`, `site.talks`, and `site.posts` directly.
+Three collections in `_config.yml`: `publications`, `teaching`, `talks` (all `output: false`). The one-page layout pulls these collections inline.
 
 ### JavaScript
-Source files in `assets/js/_main.js` and `assets/js/plugins/`. The npm build concatenates and minifies them into `assets/js/main.min.js`. Never edit `main.min.js` directly — edit source files and run `npm run build:js`. The one-page nav/scroll JS is inlined at the bottom of `one-page.html`.
+Source files are `assets/js/_main.js` and `assets/js/theme.js`. The npm build concatenates and minifies them into `assets/js/main.min.js`.
+
+Notes:
+- Never edit `assets/js/main.min.js` directly.
+- The one-page nav behavior is inlined at the bottom of `_layouts/one-page.html`.
+- Site behavior is light-only; dark-theme branches were removed.
 
 ### Styling
-Theme is set via `site_theme: "default"` in `_config.yml` (alternative: `"air"`). Custom styles go in `_sass/`. Changes to SCSS require a Jekyll rebuild to take effect locally.
+Theme is set via `site_theme: "default"` in `_config.yml` and the implementation is light-only. Custom styles go in `_sass/`. Changes to SCSS require a Jekyll rebuild to take effect locally.
 
 ### Adding Publications
 1. Create a `.md` file in `_publications/` named `YYYY-MM-DD-slug.md`
@@ -76,10 +78,10 @@ Theme is set via `site_theme: "default"` in `_config.yml` (alternative: `"air"`)
 Upload PDFs and other files to `/files/` — accessible at `https://pepperxu.github.io/files/<filename>`.
 
 ## Key Config Files
-- **`_config.yml`** — Jekyll settings, author profile, social links, plugin config
+- **`_config.yml`** — One-page settings, collections, plugin config (`jekyll-feed`, `jekyll-sitemap`, `jekyll-redirect-from`)
 - **`_config_docker.yml`** — Overrides for Docker environment
 - **`Gemfile`** — Ruby dependencies (uses `github-pages` gem for compatibility)
 - **`package.json`** — JS build toolchain only; not a Node.js app
 
 ## Generated/Ignored Files
-`_site/`, `.sass-cache/`, `node_modules/`, `Gemfile.lock`, `vendor/` are gitignored and should not be edited directly.
+`_site/`, `.sass-cache/`, `node_modules/`, `Gemfile.lock`, `vendor/` are generated/ignored and should not be edited directly.
