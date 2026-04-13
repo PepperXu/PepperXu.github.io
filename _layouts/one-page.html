@@ -120,60 +120,86 @@ layout: compress
           <h3 class="op-subsection__title"><span data-en="Highlighted Publications" data-zh="重点论文">Highlighted Publications</span></h3>
           <div class="op-pub-grid op-pub-grid--featured">
             {% for pub in featured_pubs reversed %}
-            <article class="op-pub-card op-pub-card--featured">
-              {% if pub.header.images and pub.header.images.size > 0 %}
-              <div class="op-pub-card__fig op-pub-card__fig--gallery">
-                <div class="op-pub-card__fig-imgs">
-                  {% for img in pub.header.images %}
-                  <img src="{{ img.src | prepend: base_path }}" alt="{{ img.label | default: pub.title }}" class="op-pub-fig-img{% if forloop.first %} op-pub-fig-img--active{% endif %}"{% unless forloop.first %} loading="lazy"{% endunless %} />
-                  {% endfor %}
+            <article class="op-pub-card op-pub-card--featured{% if pub.webglurl %} op-pub-card--with-webgl{% endif %}">
+              <div class="op-pub-card__split-left">
+                {% if pub.header.images and pub.header.images.size > 0 %}
+                <div class="op-pub-card__fig op-pub-card__fig--gallery">
+                  <div class="op-pub-card__fig-imgs">
+                    {% for img in pub.header.images %}
+                    <img src="{{ img.src | prepend: base_path }}" alt="{{ img.label | default: pub.title }}" class="op-pub-fig-img{% if forloop.first %} op-pub-fig-img--active{% endif %}"{% unless forloop.first %} loading="lazy"{% endunless %} />
+                    {% endfor %}
+                  </div>
+                  <div class="op-pub-card__fig-btns">
+                    {% for img in pub.header.images %}
+                    <button type="button" class="op-pub-fig-btn{% if forloop.first %} op-pub-fig-btn--active{% endif %}" data-idx="{{ forloop.index0 }}">{{ img.label }}</button>
+                    {% endfor %}
+                  </div>
                 </div>
-                <div class="op-pub-card__fig-btns">
-                  {% for img in pub.header.images %}
-                  <button type="button" class="op-pub-fig-btn{% if forloop.first %} op-pub-fig-btn--active{% endif %}" data-idx="{{ forloop.index0 }}">{{ img.label }}</button>
-                  {% endfor %}
+                {% elsif pub.header.teaser %}
+                <div class="op-pub-card__fig">
+                  <img src="{{ pub.header.teaser | prepend: base_path }}" alt="{{ pub.title }}" loading="lazy" />
+                </div>
+                {% endif %}
+                <div class="op-pub-card__body">
+                  {% if pub.award %}
+                  <span class="op-badge op-badge--award">
+                    <i class="fas fa-award" aria-hidden="true"></i> {{ pub.award }}
+                  </span>
+                  {% endif %}
+                  <h4 class="op-pub-card__title">
+                    {% if pub.paperurl %}
+                      <a href="{{ pub.paperurl }}" target="_blank" rel="noopener">{{ pub.title }}</a>
+                    {% else %}
+                      {{ pub.title }}
+                    {% endif %}
+                  </h4>
+                  {% if pub.authors %}
+                  <p class="op-pub-card__authors">{{ pub.authors }}</p>
+                  {% endif %}
+                  <p class="op-pub-card__venue"><em>{{ pub.venue }}</em> &middot; {{ pub.date | date: "%Y" }}</p>
+                  {% if pub.description %}
+                    {% if pub.description_zh %}
+                      <p class="op-pub-card__desc op-lang-en">{{ pub.description }}</p>
+                      <p class="op-pub-card__desc op-lang-zh">{{ pub.description_zh }}</p>
+                    {% else %}
+                      <p class="op-pub-card__desc">{{ pub.description }}</p>
+                    {% endif %}
+                  {% elsif pub.excerpt %}
+                    <p class="op-pub-card__desc">{{ pub.excerpt | strip_html | truncatewords: 45 }}</p>
+                  {% endif %}
+                  <div class="op-pub-card__links">
+                    {% if pub.paperurl %}<a href="{{ pub.paperurl }}" class="op-tag" target="_blank" rel="noopener"><span data-en="Paper" data-zh="论文">Paper</span></a>{% endif %}
+                    {% if pub.videourl %}<a href="{{ pub.videourl }}" class="op-tag" target="_blank" rel="noopener"><span data-en="Video" data-zh="视频">Video</span></a>{% endif %}
+                    {% if pub.demourl %}<a href="{{ pub.demourl }}" class="op-tag" target="_blank" rel="noopener"><span data-en="Demo" data-zh="演示">Demo</span></a>{% endif %}
+                    {% if pub.slidesurl %}<a href="{{ pub.slidesurl }}" class="op-tag" target="_blank" rel="noopener"><span data-en="Slides" data-zh="幻灯片">Slides</span></a>{% endif %}
+                    {% if pub.codeurl %}<a href="{{ pub.codeurl }}" class="op-tag" target="_blank" rel="noopener"><span data-en="Code" data-zh="代码">Code</span></a>{% endif %}
+                  </div>
                 </div>
               </div>
-              {% elsif pub.header.teaser %}
-              <div class="op-pub-card__fig">
-                <img src="{{ pub.header.teaser | prepend: base_path }}" alt="{{ pub.title }}" loading="lazy" />
+              {% if pub.webglurl %}
+              <div class="op-pub-card__split-right">
+                <div class="op-webgl-placeholder">
+                  {% if pub.header.teaser %}
+                  <img src="{{ pub.header.teaser | prepend: base_path }}" alt="" class="op-webgl-placeholder__bg" loading="lazy" />
+                  {% elsif pub.header.images and pub.header.images.size > 0 %}
+                  <img src="{{ pub.header.images[0].src | prepend: base_path }}" alt="" class="op-webgl-placeholder__bg" loading="lazy" />
+                  {% endif %}
+                  <button type="button" class="op-webgl-play-btn" aria-label="Play interactive demo">
+                    <i class="fas fa-play" aria-hidden="true"></i>
+                    <span data-en="Play Demo" data-zh="运行演示">Play Demo</span>
+                  </button>
+                </div>
+                <iframe data-src="{{ pub.webglurl }}"
+                        title="{{ pub.title }} — Interactive Demo"
+                        allowfullscreen
+                        frameborder="0"
+                        class="op-pub-webgl-frame"
+                        style="display:none"></iframe>
+                <button type="button" class="op-webgl-close-btn" aria-label="Close demo" style="display:none">
+                  <i class="fas fa-times" aria-hidden="true"></i>
+                </button>
               </div>
               {% endif %}
-              <div class="op-pub-card__body">
-                {% if pub.award %}
-                <span class="op-badge op-badge--award">
-                  <i class="fas fa-award" aria-hidden="true"></i> {{ pub.award }}
-                </span>
-                {% endif %}
-                <h4 class="op-pub-card__title">
-                  {% if pub.paperurl %}
-                    <a href="{{ pub.paperurl }}" target="_blank" rel="noopener">{{ pub.title }}</a>
-                  {% else %}
-                    {{ pub.title }}
-                  {% endif %}
-                </h4>
-                {% if pub.authors %}
-                <p class="op-pub-card__authors">{{ pub.authors }}</p>
-                {% endif %}
-                <p class="op-pub-card__venue"><em>{{ pub.venue }}</em> &middot; {{ pub.date | date: "%Y" }}</p>
-                {% if pub.description %}
-                  {% if pub.description_zh %}
-                    <p class="op-pub-card__desc op-lang-en">{{ pub.description }}</p>
-                    <p class="op-pub-card__desc op-lang-zh">{{ pub.description_zh }}</p>
-                  {% else %}
-                    <p class="op-pub-card__desc">{{ pub.description }}</p>
-                  {% endif %}
-                {% elsif pub.excerpt %}
-                  <p class="op-pub-card__desc">{{ pub.excerpt | strip_html | truncatewords: 45 }}</p>
-                {% endif %}
-                <div class="op-pub-card__links">
-                  {% if pub.paperurl %}<a href="{{ pub.paperurl }}" class="op-tag" target="_blank" rel="noopener"><span data-en="Paper" data-zh="论文">Paper</span></a>{% endif %}
-                  {% if pub.videourl %}<a href="{{ pub.videourl }}" class="op-tag" target="_blank" rel="noopener"><span data-en="Video" data-zh="视频">Video</span></a>{% endif %}
-                  {% if pub.demourl %}<a href="{{ pub.demourl }}" class="op-tag" target="_blank" rel="noopener"><span data-en="Demo" data-zh="演示">Demo</span></a>{% endif %}
-                  {% if pub.slidesurl %}<a href="{{ pub.slidesurl }}" class="op-tag" target="_blank" rel="noopener"><span data-en="Slides" data-zh="幻灯片">Slides</span></a>{% endif %}
-                  {% if pub.codeurl %}<a href="{{ pub.codeurl }}" class="op-tag" target="_blank" rel="noopener"><span data-en="Code" data-zh="代码">Code</span></a>{% endif %}
-                </div>
-              </div>
             </article>
             {% endfor %}
           </div>
@@ -484,6 +510,31 @@ layout: compress
           if (current) setActive(current);
         }, { passive: true });
       }
+
+      document.querySelectorAll('.op-webgl-play-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var right = btn.closest('.op-pub-card__split-right');
+          var placeholder = right.querySelector('.op-webgl-placeholder');
+          var frame = right.querySelector('.op-pub-webgl-frame');
+          var closeBtn = right.querySelector('.op-webgl-close-btn');
+          frame.setAttribute('src', frame.getAttribute('data-src'));
+          frame.style.display = '';
+          placeholder.style.display = 'none';
+          closeBtn.style.display = '';
+        });
+      });
+
+      document.querySelectorAll('.op-webgl-close-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var right = btn.closest('.op-pub-card__split-right');
+          var placeholder = right.querySelector('.op-webgl-placeholder');
+          var frame = right.querySelector('.op-pub-webgl-frame');
+          frame.setAttribute('src', 'about:blank');
+          frame.style.display = 'none';
+          placeholder.style.display = '';
+          btn.style.display = 'none';
+        });
+      });
 
       document.querySelectorAll('.op-pub-card__fig--gallery').forEach(function (gallery) {
         var imgs = gallery.querySelectorAll('.op-pub-fig-img');

@@ -48,7 +48,9 @@
       "Bash(python3 -c ':*)",
       "Bash(/c/Python313/python -c ':*)",
       "Bash(curl:*)",
-      "Bash(head -20 /c/Users/XPS83/Documents/GitHub/PepperXu.github.io/_talks/*.md)"
+      "Bash(head -20 /c/Users/XPS83/Documents/GitHub/PepperXu.github.io/_talks/*.md)",
+      "Bash(grep -l \"featured: true\" \"C:\\\\Users\\\\XPS83\\\\Documents\\\\GitHub\\\\PepperXu.github.io\\\\_publications\"/*.md)",
+      "Bash(grep:*)"
     ]
   }
 }
