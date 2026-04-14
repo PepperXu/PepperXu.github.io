@@ -517,7 +517,11 @@ layout: compress
           var placeholder = right.querySelector('.op-webgl-placeholder');
           var frame = right.querySelector('.op-pub-webgl-frame');
           var closeBtn = right.querySelector('.op-webgl-close-btn');
-          frame.setAttribute('src', frame.getAttribute('data-src'));
+          var w = right.clientWidth;
+          var h = right.clientHeight;
+          var src = frame.getAttribute('data-src');
+          src += (src.indexOf('?') >= 0 ? '&' : '?') + 'width=' + w + '&height=' + h;
+          frame.setAttribute('src', src);
           frame.style.display = '';
           placeholder.style.display = 'none';
           closeBtn.style.display = '';
