@@ -50,7 +50,14 @@
       "Bash(curl:*)",
       "Bash(head -20 /c/Users/XPS83/Documents/GitHub/PepperXu.github.io/_talks/*.md)",
       "Bash(grep -l \"featured: true\" \"C:\\\\Users\\\\XPS83\\\\Documents\\\\GitHub\\\\PepperXu.github.io\\\\_publications\"/*.md)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Read(//c/Program Files/Docker/Docker/resources/bin/**)",
+      "Read(//c/Program Files/Docker/resources/bin/**)",
+      "Read(//c/Program Files/Docker/**)",
+      "Bash(export PATH=\"$PATH:/c/Program Files/Docker/Docker/resources/bin\")",
+      "Skill(update-config)",
+      "Bash(powershell.exe:*)",
+      "Bash(/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe:*)"
     ]
   }
 }
