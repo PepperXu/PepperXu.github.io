@@ -28,6 +28,9 @@ layout: compress
           <li><a href="#teaching"><span data-en="Teaching" data-zh="教学">Teaching</span></a></li>
           {% if site.talks.size > 0 %}<li><a href="#talks"><span data-en="Talks" data-zh="演讲">Talks</span></a></li>{% endif %}
           <li><a href="#resources"><span data-en="Resources" data-zh="资源">Resources</span></a></li>
+          {% if site.data.splats and site.data.splats.size > 0 %}
+          <li><a href="#splats"><span data-en="3D Splats" data-zh="三维点云">3D Splats</span></a></li>
+          {% endif %}
           {% if site.data.favorites %}
           <li><a href="#favorites"><span data-en="Favorites" data-zh="个人喜好">Favorites</span></a></li>
           {% endif %}
@@ -383,6 +386,53 @@ layout: compress
       </div>
     </section>
 
+    <!-- ─── 3D GAUSSIAN SPLATS ──────────────────────────────── -->
+    {% if site.data.splats and site.data.splats.size > 0 %}
+    <section id="splats" class="op-section op-section--alt">
+      <div class="op-container">
+        <h2 class="op-section__title"><span data-en="3D Gaussian Splats" data-zh="三维高斯点云">3D Gaussian Splats</span></h2>
+        <div class="op-splat-grid">
+          {% for splat in site.data.splats %}
+          <article class="op-splat-card" data-splat-id="{{ splat.id }}">
+            <div class="op-splat-placeholder">
+              {% if splat.thumbnail %}
+              <img src="{{ splat.thumbnail | prepend: base_path }}"
+                   alt="{{ splat.title }}" class="op-splat-placeholder__bg" loading="lazy" />
+              {% endif %}
+              <button type="button" class="op-splat-load-btn"
+                      data-splat-url="{{ splat.file | prepend: base_path }}"
+                      aria-label="Load 3D viewer">
+                <i class="fas fa-cube" aria-hidden="true"></i>
+                <span data-en="View in 3D" data-zh="三维查看">View in 3D</span>
+              </button>
+            </div>
+            <canvas class="op-splat-canvas" style="display:none"></canvas>
+            <button type="button" class="op-splat-close-btn" style="display:none" aria-label="Close viewer">
+              <i class="fas fa-times" aria-hidden="true"></i>
+            </button>
+            <div class="op-splat-card__body">
+              <h3 class="op-splat-card__title">
+                {% if splat.title_zh %}
+                  <span class="op-lang-en">{{ splat.title }}</span>
+                  <span class="op-lang-zh">{{ splat.title_zh }}</span>
+                {% else %}{{ splat.title }}{% endif %}
+              </h3>
+              {% if splat.description %}
+                {% if splat.description_zh %}
+                  <p class="op-splat-card__desc op-lang-en">{{ splat.description }}</p>
+                  <p class="op-splat-card__desc op-lang-zh">{{ splat.description_zh }}</p>
+                {% else %}
+                  <p class="op-splat-card__desc">{{ splat.description }}</p>
+                {% endif %}
+              {% endif %}
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    {% endif %}
+
     <!-- ─── FAVORITES ────────────────────────────────────────── -->
     {% if site.data.favorites and site.data.favorites.categories %}
     <section id="favorites" class="op-section op-section--alt">
@@ -539,6 +589,100 @@ layout: compress
           btn.style.display = 'none';
         });
       });
+
+      /* ── 3D Gaussian Splat Viewers ──────────────────────────── */
+      (function () {
+        var GSPLAT_CDN = 'https://cdn.jsdelivr.net/npm/gsplat/dist/index.es.js';
+        var _gsplatPromise = null;
+        var _activeViewers = {};
+
+        function loadGsplat() {
+          if (!_gsplatPromise) _gsplatPromise = import(GSPLAT_CDN);
+          return _gsplatPromise;
+        }
+
+        document.querySelectorAll('.op-splat-load-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var card        = btn.closest('.op-splat-card');
+            var id          = card.dataset.splatId;
+            var url         = btn.dataset.splatUrl;
+            var placeholder = card.querySelector('.op-splat-placeholder');
+            var canvas      = card.querySelector('.op-splat-canvas');
+            var closeBtn    = card.querySelector('.op-splat-close-btn');
+
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin" aria-hidden="true"></i><span> Loading…</span>';
+
+            loadGsplat().then(function (SPLAT) {
+              canvas.style.display = 'block';
+              placeholder.style.display = 'none';
+              closeBtn.style.display = 'flex';
+
+              canvas.width  = card.clientWidth || 340;
+              canvas.height = 260;
+
+              var scene    = new SPLAT.Scene();
+              var camera   = new SPLAT.Camera();
+              var renderer = new SPLAT.WebGLRenderer(canvas);
+              var controls = new SPLAT.OrbitControls(camera, renderer.canvas);
+              var rafId    = null;
+
+              function frame() {
+                controls.update();
+                renderer.render(scene, camera);
+                rafId = requestAnimationFrame(frame);
+              }
+
+              SPLAT.Loader.LoadAsync(url, scene, function () {}).then(function () {
+                rafId = requestAnimationFrame(frame);
+              }).catch(function (err) {
+                console.error('Splat load error:', err);
+              });
+
+              _activeViewers[id] = {
+                cancel: function () {
+                  if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
+                  try { renderer._gl.getExtension('WEBGL_lose_context').loseContext(); } catch (e) {}
+                }
+              };
+            }).catch(function (err) {
+              console.error('gsplat.js load failed:', err);
+              canvas.style.display = 'none';
+              placeholder.style.display = 'flex';
+              btn.disabled = false;
+              btn.innerHTML = '<i class="fas fa-cube" aria-hidden="true"></i>'
+                            + '<span data-en="View in 3D" data-zh="三维查看">View in 3D</span>';
+            });
+          });
+        });
+
+        document.querySelectorAll('.op-splat-close-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var card        = btn.closest('.op-splat-card');
+            var id          = card.dataset.splatId;
+            var placeholder = card.querySelector('.op-splat-placeholder');
+            var canvas      = card.querySelector('.op-splat-canvas');
+            var loadBtn     = card.querySelector('.op-splat-load-btn');
+
+            if (_activeViewers[id]) {
+              _activeViewers[id].cancel();
+              delete _activeViewers[id];
+            }
+
+            canvas.style.display = 'none';
+            placeholder.style.display = 'flex';
+            btn.style.display = 'none';
+            loadBtn.disabled = false;
+            loadBtn.innerHTML = '<i class="fas fa-cube" aria-hidden="true"></i>'
+                              + '<span data-en="View in 3D" data-zh="三维查看">View in 3D</span>';
+
+            var lang = document.body.classList.contains('op-body--zh') ? 'zh' : 'en';
+            loadBtn.querySelectorAll('[data-en][data-zh]').forEach(function (el) {
+              el.textContent = el.getAttribute('data-' + lang);
+            });
+          });
+        });
+      }());
 
       document.querySelectorAll('.op-pub-card__fig--gallery').forEach(function (gallery) {
         var imgs = gallery.querySelectorAll('.op-pub-fig-img');

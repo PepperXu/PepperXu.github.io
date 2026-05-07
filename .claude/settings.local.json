@@ -57,7 +57,13 @@
       "Bash(export PATH=\"$PATH:/c/Program Files/Docker/Docker/resources/bin\")",
       "Skill(update-config)",
       "Bash(powershell.exe:*)",
-      "Bash(/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe:*)"
+      "Bash(/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe:*)",
+      "Bash(ruby --version)",
+      "Bash(bundler --version)",
+      "Bash(gem --version)",
+      "Bash(gem env *)",
+      "Bash(gem list *)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\('version:', d.get\\('version'\\)\\); print\\('main:', d.get\\('main'\\)\\); print\\('module:', d.get\\('module'\\)\\); print\\('exports:', list\\(d.get\\('exports', {}\\).keys\\(\\)\\)[:5]\\)\")"
     ]
   }
 }

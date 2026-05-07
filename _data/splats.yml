@@ -1,0 +1,16 @@
+# 3D Gaussian Splat entries
+# Each entry requires:
+#   id:          unique slug (used as DOM identifier)
+#   title:       display title (English)
+#   file:        path to .splat or .ply file under /files/splats/
+#   thumbnail:   path to preview image under /images/splats/
+# Optional:
+#   title_zh, description, description_zh
+
+- id: my-workspace
+  title: "My Workspace"
+  title_zh: "我的工作环境"
+  description: "Gaussian splatting with 261 images extracted from a 1:05 minutes video recording using my phone. Made with 30,000 iterations and 2,804,138 gaussians. Post-processed and cleaned-up with SuperSplat. "
+  description_zh: "录制了1：05分钟的视频提取出261张图片进行高斯点云重建。使用30,000个iterations生成了2,804,138个高斯。用SuperSplat进行后期处理。"
+  file: "/files/splats/workspace.splat"
+  thumbnail: "/images/splats/workspace.png"
