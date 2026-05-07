@@ -39,7 +39,7 @@ npm run watch:js        # Watch and rebuild on changes
 ## Architecture
 
 ### One-Page Layout (Homepage)
-The site uses a custom one-page layout (`_layouts/one-page.html`) that renders all sections — About, Publications, Experience, Teaching, Talks, Resources — on a single scrolling page. `_pages/about.md` (permalink `/`) uses `layout: one-page`. The layout bypasses the standard masthead and sidebar, using its own sticky nav instead.
+The site uses a custom one-page layout (`_layouts/one-page.html`) that renders all sections — About, Publications, Experience, Teaching, Talks, Resources, 3D Splats — on a single scrolling page. `_pages/about.md` (permalink `/`) uses `layout: one-page`. The layout bypasses the standard masthead and sidebar, using its own sticky nav instead.
 
 Styles for the one-page layout live in `_sass/layout/_one-page.scss`, imported last in `assets/css/main.scss`.
 
@@ -49,6 +49,7 @@ Styles for the one-page layout live in `_sass/layout/_one-page.scss`, imported l
 - **`_talks/`** — Talks rendered as a list on the homepage.
 - **`_data/experience.yml`** — Education/work timeline data for the Experience section.
 - **`_data/resources.yml`** — External links for the Resources section (`external` key, each with `title`, `url`, `icon`, `description`).
+- **`_data/splats.yml`** — 3D Gaussian Splat entries for the Splats section. Each entry: `id` (unique slug), `title`, `file` (path under `/files/splats/`), `thumbnail` (path under `/images/splats/`). Optional: `title_zh`, `description`, `description_zh`. The section is hidden when the file has no entries.
 - **`_data/`** — Also includes `authors.yml` and `ui-text.yml`.
 - **`_layouts/`** — Minimal set: `compress.html`, `one-page.html`.
 - **`_includes/`** — Minimal set used by one-page: `base_path`, `head.html`, `head/custom.html`, `browser-upgrade.html`, `footer.html`, `footer/custom.html`, `scripts.html`, `seo.html`.
@@ -67,6 +68,23 @@ Notes:
 
 ### Styling
 Theme is set via `site_theme: "default"` in `_config.yml` and the implementation is light-only. Custom styles go in `_sass/`. Changes to SCSS require a Jekyll rebuild to take effect locally.
+
+### Adding 3D Gaussian Splats
+1. Upload the `.splat` or `.ply` file to `/files/splats/` (keep under 100 MB; GitHub Pages does not serve Git LFS files)
+2. Upload a thumbnail image (recommended ~800×450 JPEG) to `/images/splats/`
+3. Add an entry to `_data/splats.yml`:
+   ```yaml
+   - id: my-scene          # unique slug
+     title: "My Scene"
+     title_zh: "我的场景"   # optional
+     description: "..."    # optional
+     description_zh: "..."  # optional
+     file: "/files/splats/my-scene.splat"
+     thumbnail: "/images/splats/my-scene-thumb.jpg"
+   ```
+4. The `#splats` nav link and section appear automatically once the file has entries.
+
+The viewer uses `gsplat.js` (v1.x, loaded from jsDelivr CDN as an ES module). It is lazy-loaded on first "View in 3D" click and cached for subsequent viewers. Viewer initialization uses `SPLAT.Scene` + `SPLAT.Camera` + `SPLAT.WebGLRenderer(canvas)` + `SPLAT.OrbitControls` + `SPLAT.Loader.LoadAsync`. The viewer JS is inlined in `_layouts/one-page.html` (not in `_main.js`) because it uses dynamic ES module `import()` which is incompatible with the UglifyJS bundle.
 
 ### Adding Publications
 1. Create a `.md` file in `_publications/` named `YYYY-MM-DD-slug.md`
